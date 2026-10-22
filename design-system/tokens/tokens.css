@@ -1,0 +1,274 @@
+/* Jennete Rent Design System — GENERATED from design-tokens.json by build-tokens.py. Do not edit. */
+/* Note: CSS variables cannot be used inside @media; breakpoints are exposed for JS/reference only. */
+:root{
+  /* color/primitive */
+  --white: #FFFFFF;
+  --purple-50: #F5F1FA;
+  --purple-100: #E6DDF2;
+  --purple-200: #D7C8EE;
+  --purple-300: #CDBDE3;
+  --purple-400: #9C7FC7;
+  --purple-450: #9C8BB5;
+  --purple-500: #8566B2;
+  --purple-600: #785BA3;
+  --purple-650: #6A4E8E;
+  --purple-700: #5D447D;
+  --purple-750: #5A4279;
+  --purple-800: #4F3A6B;
+  --purple-900: #1B0F3A;
+  --purple-950: #160C30;
+  --ink-50: #F2F2F2;
+  --ink-100: #E6E6E6;
+  --ink-150: #E2E5E7;
+  --ink-200: #D8DADB;
+  --ink-250: #D9D7D6;
+  --ink-300: #C8CDD1;
+  --ink-350: #B9C0C6;
+  --ink-400: #AEB4B9;
+  --ink-500: #8A9197;
+  --ink-600: #626A71;
+  --ink-700: #4A5157;
+  --ink-750: #3B4247;
+  --ink-800: #2C353C;
+  --ink-850: #1A2228;
+  --ink-900: #0E1418;
+  --ink-950: #06070F;
+  --green-100: #CDEBD8;
+  --green-400: #3DDC84;
+  --green-600: #1A7F45;
+  --green-700: #18763F;
+  --red-50: #FEF3F2;
+  --red-600: #B42318;
+  --amber-50: #FFF6D6;
+  --amber-400: #D9B44A;
+  --amber-800: #7A5A00;
+  --blue-50: #EEF4FB;
+  --blue-600: #1F5FA8;
+  --alpha-white-03: rgba(255,255,255,.03);
+  --alpha-white-04: rgba(255,255,255,.04);
+  --alpha-white-06: rgba(255,255,255,.06);
+  --alpha-white-08: rgba(255,255,255,.08);
+  --alpha-white-10: rgba(255,255,255,.10);
+  --alpha-white-14: rgba(255,255,255,.14);
+  --alpha-white-16: rgba(255,255,255,.16);
+  --alpha-white-22: rgba(255,255,255,.22);
+  --alpha-white-30: rgba(255,255,255,.30);
+  --alpha-white-50: rgba(255,255,255,.50);
+  --alpha-white-55: rgba(255,255,255,.55);
+  --alpha-white-78: rgba(255,255,255,.78);
+  --alpha-white-82: rgba(255,255,255,.82);
+  --alpha-white-86: rgba(255,255,255,.86);
+  --alpha-ink-08: rgba(14,20,24,.08);
+  --alpha-ink-25: rgba(14,20,24,.25);
+  --alpha-ink-55: rgba(14,20,24,.55);
+  --alpha-ink-70: rgba(14,20,24,.70);
+  --alpha-purple-08: rgba(93,68,125,.08);
+  --alpha-purple-10: rgba(120,91,163,.10);
+  --alpha-purple-18: rgba(93,68,125,.18);
+  --alpha-purple-22: rgba(93,68,125,.22);
+  --alpha-purple-28: rgba(93,68,125,.28);
+  --alpha-purple-35: rgba(205,189,227,.35);
+  --alpha-green-12: rgba(26,127,69,.12);
+  --alpha-live-55: rgba(61,220,132,.55);
+  --alpha-live-00: rgba(61,220,132,0);
+
+  /* color/semantic */
+  --color-bg: var(--white);
+  --color-bg-soft: var(--ink-50);
+  --color-bg-soft-2: var(--ink-100);
+  --color-bg-photo: var(--ink-250);
+  --color-bg-inverse: var(--ink-900);
+  --color-bg-inverse-raised: var(--ink-850);
+  --color-bg-deep: var(--purple-900);
+  --color-bg-glass: var(--alpha-white-78);
+  --color-bg-glass-strong: var(--alpha-white-86);
+  --color-bg-overlay: var(--alpha-ink-55);
+  --color-text: var(--ink-900);
+  --color-text-secondary: var(--ink-700);
+  --color-text-muted: var(--ink-600);
+  --color-text-on-brand: var(--white);
+  --color-text-inverse: var(--white);
+  --color-text-inverse-secondary: var(--ink-300);
+  --color-text-inverse-body: var(--ink-350);
+  --color-text-inverse-muted: var(--ink-400);
+  --color-text-inverse-accent: var(--purple-300);
+  --color-text-on-photo: var(--ink-150);
+  --color-border: var(--ink-200);
+  --color-border-strong: var(--ink-900);
+  --color-border-inverse: var(--alpha-white-10);
+  --color-border-inverse-strong: var(--ink-800);
+  --color-brand: var(--purple-700);
+  --color-brand-hover: var(--purple-650);
+  --color-brand-pressed: var(--purple-800);
+  --color-brand-soft: var(--alpha-purple-08);
+  --color-brand-line: var(--alpha-purple-28);
+  --color-brand-halo: var(--alpha-purple-22);
+  --color-focus-ring: var(--alpha-purple-18);
+  --color-success: var(--green-600);
+  --color-success-strong: var(--green-700);
+  --color-success-soft: var(--alpha-green-12);
+  --color-live: var(--green-400);
+  --color-live-text: var(--green-100);
+  --color-danger: var(--red-600);
+  --color-danger-soft: var(--red-50);
+  --color-warning: var(--amber-800);
+  --color-warning-soft: var(--amber-50);
+  --color-warning-line: var(--amber-400);
+  --color-info: var(--blue-600);
+  --color-info-soft: var(--blue-50);
+  --color-whatsapp: var(--green-600);
+  --color-whatsapp-hover: var(--green-700);
+
+  /* gradient */
+  --gradient-brand: linear-gradient(180deg,var(--purple-600) 0%,var(--purple-700) 55%,var(--purple-800) 100%);
+  --gradient-brand-hover: linear-gradient(180deg,var(--purple-500) 0%,var(--purple-650) 55%,var(--purple-750) 100%);
+  --gradient-icon: linear-gradient(180deg,var(--purple-600),var(--purple-700));
+  --gradient-progress: linear-gradient(90deg,var(--purple-400),var(--purple-700));
+  --gradient-glow: radial-gradient(closest-side,rgba(120,91,163,.45),rgba(93,68,125,.12) 55%,transparent 72%);
+  --gradient-scrim-hero: linear-gradient(90deg,rgba(10,14,18,.78) 0%,rgba(10,14,18,.45) 38%,rgba(10,14,18,0) 65%),linear-gradient(0deg,rgba(10,14,18,.7) 0%,rgba(10,14,18,0) 35%),linear-gradient(180deg,rgba(10,14,18,.45) 0%,rgba(10,14,18,0) 18%);
+  --gradient-scrim-hero-mobile: linear-gradient(0deg,rgba(10,14,18,.9) 0%,rgba(10,14,18,.55) 45%,rgba(10,14,18,.15) 75%),linear-gradient(180deg,rgba(10,14,18,.5) 0%,rgba(10,14,18,0) 20%);
+  --gradient-scrim-card: linear-gradient(90deg,rgba(6,7,15,.92) 0%,rgba(6,7,15,.72) 45%,rgba(6,7,15,.2) 100%),linear-gradient(0deg,rgba(6,7,15,.55) 0%,rgba(6,7,15,0) 45%);
+  --gradient-scrim-band: linear-gradient(90deg,rgba(22,12,48,.88) 0%,rgba(22,12,48,.6) 40%,rgba(22,12,48,0) 70%);
+  --gradient-placeholder: linear-gradient(180deg,#E9EAEB,#D4D7D9);
+  --gradient-placeholder-dark: linear-gradient(180deg,#2A3339,#12191E);
+
+  /* font */
+  --font: "Albert Sans","Helvetica Neue",Arial,sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* text */
+  --text-display-size: clamp(2.2rem,min(3.5vw,6.8vh),4.3rem);
+  --text-display-lh: 1.05;
+  --text-display-ls: -0.04em;
+  --text-display-fw: 600;
+  --text-h2-lg-size: clamp(2rem,1.3rem + 2.6vw,3.5rem);
+  --text-h2-lg-lh: 1.1;
+  --text-h2-lg-ls: -0.03em;
+  --text-h2-lg-fw: 600;
+  --text-h2-size: clamp(1.8rem,1.3rem + 1.8vw,2.75rem);
+  --text-h2-lh: 1.1;
+  --text-h2-ls: -0.02em;
+  --text-h2-fw: 600;
+  --text-h3-size: clamp(1.15rem,1rem + .5vw,1.45rem);
+  --text-h3-lh: 1.3;
+  --text-h3-ls: -0.02em;
+  --text-h3-fw: 600;
+  --text-title-size: 1.35rem;
+  --text-title-lh: 1.25;
+  --text-title-ls: -0.02em;
+  --text-title-fw: 600;
+  --text-title-sm-size: 1.15rem;
+  --text-title-sm-lh: 1.3;
+  --text-title-sm-ls: -0.01em;
+  --text-title-sm-fw: 600;
+  --text-lead-size: 1.05rem;
+  --text-lead-lh: 1.6;
+  --text-lead-ls: 0;
+  --text-lead-fw: 400;
+  --text-body-size: 1rem;
+  --text-body-lh: 1.6;
+  --text-body-ls: 0;
+  --text-body-fw: 400;
+  --text-body-sm-size: .93rem;
+  --text-body-sm-lh: 1.55;
+  --text-body-sm-ls: 0;
+  --text-body-sm-fw: 400;
+  --text-label-size: .88rem;
+  --text-label-lh: 1.4;
+  --text-label-ls: 0;
+  --text-label-fw: 600;
+  --text-caption-size: .8rem;
+  --text-caption-lh: 1.4;
+  --text-caption-ls: 0;
+  --text-caption-fw: 400;
+  --text-numeral-size: 2.75rem;
+  --text-numeral-lh: 1;
+  --text-numeral-ls: -0.04em;
+  --text-numeral-fw: 500;
+  --text-stat-size: 1.9rem;
+  --text-stat-lh: 1.05;
+  --text-stat-ls: -0.03em;
+  --text-stat-fw: 600;
+
+  /* space */
+  --space-0: 0;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-section: clamp(4rem,8vw,8rem);
+  --space-gutter: clamp(2rem,6vw,8rem);
+  --space-grid-gap: clamp(1rem,2vw,1.5rem);
+
+  /* size */
+  --size-container: 1440px;
+  --size-header: 72px;
+  --size-control: 48px;
+  --size-control-sm: 44px;
+  --size-icon-tile: 44px;
+  --size-icon-node: 56px;
+  --size-measure: 56ch;
+
+  /* radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+  --radius-full: 50%;
+
+  /* shadow */
+  --shadow-hairline: 0 0 0 1px rgba(14,20,24,.08);
+  --shadow-mega: 0 24px 40px rgba(14,20,24,.08);
+  --shadow-modal: 0 30px 80px rgba(14,20,24,.35);
+  --shadow-fab: 0 10px 28px rgba(14,20,24,.28);
+  --shadow-brand: inset 0 1px 0 rgba(255,255,255,.22),0 8px 20px -8px rgba(93,68,125,.65);
+  --shadow-icon: inset 0 1px 0 rgba(255,255,255,.25),0 0 0 6px rgba(93,68,125,.22);
+  --shadow-focus: 0 0 0 3px rgba(93,68,125,.18);
+
+  /* blur */
+  --blur-glass: saturate(180%) blur(18px);
+  --blur-panel: blur(12px);
+  --blur-overlay: blur(4px);
+
+  /* motion */
+  --ease: cubic-bezier(.25,.1,.25,1);
+  --dur-fast: 200ms;
+  --dur-base: 300ms;
+  --dur-slow: 600ms;
+  --dur-slide: 900ms;
+  --dur-kenburns: 7s;
+
+  /* breakpoint */
+  --bp-sm: 520px;
+  --bp-md: 760px;
+  --bp-lg: 900px;
+  --bp-xl: 1100px;
+
+  /* z */
+  --z-drawer: 39;
+  --z-header: 40;
+  --z-fab: 45;
+  --z-toast: 60;
+
+  /* legacy aliases — keep existing site CSS working unchanged */
+  --ink: var(--color-text); --ink-2: var(--color-text-secondary); --ink-3: var(--color-text-muted);
+  --bg: var(--color-bg); --soft: var(--color-bg-soft); --soft-2: var(--color-bg-soft-2); --line: var(--color-border);
+  --dark: var(--color-bg-inverse); --dark-2: var(--color-bg-inverse-raised); --dark-line: var(--color-border-inverse-strong);
+  --wa: var(--color-whatsapp);
+  --brand: var(--color-brand); --brand-soft: var(--color-brand-soft); --brand-line: var(--color-brand-line);
+  --r: var(--radius-sm); --r-l: var(--radius-md);
+}

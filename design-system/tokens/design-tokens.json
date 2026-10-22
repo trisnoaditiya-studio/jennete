@@ -1,0 +1,279 @@
+{
+  "$description": "Jennete Rent Design System — single source of truth. Format: W3C Design Tokens (DTCG) draft, $value/$type. References use {group.token}. Generate CSS with: python3 design-system/build-tokens.py",
+  "$version": "1.0.0",
+
+  "color": {
+    "primitive": {
+      "$type": "color",
+      "white": { "$value": "#FFFFFF" },
+      "purple": {
+        "50":  { "$value": "#F5F1FA", "$description": "Generated tint" },
+        "100": { "$value": "#E6DDF2", "$description": "CTA band body text" },
+        "200": { "$value": "#D7C8EE", "$description": "Comparison 'yes' text" },
+        "300": { "$value": "#CDBDE3", "$description": "Eyebrow / node icon on dark" },
+        "400": { "$value": "#9C7FC7", "$description": "Progress gradient start" },
+        "450": { "$value": "#9C8BB5", "$description": "Muted step number on dark" },
+        "500": { "$value": "#8566B2", "$description": "Gradient hover top" },
+        "600": { "$value": "#785BA3", "$description": "Gradient top / glow" },
+        "650": { "$value": "#6A4E8E", "$description": "Gradient hover mid" },
+        "700": { "$value": "#5D447D", "$description": "BRAND" },
+        "750": { "$value": "#5A4279", "$description": "Gradient hover bottom" },
+        "800": { "$value": "#4F3A6B", "$description": "Gradient bottom / brand pressed" },
+        "900": { "$value": "#1B0F3A", "$description": "CTA band deep surface" },
+        "950": { "$value": "#160C30", "$description": "CTA band scrim" }
+      },
+      "ink": {
+        "50":  { "$value": "#F2F2F2", "$description": "soft surface" },
+        "100": { "$value": "#E6E6E6", "$description": "soft-2 / pressed" },
+        "150": { "$value": "#E2E5E7", "$description": "text on photo" },
+        "200": { "$value": "#D8DADB", "$description": "line" },
+        "250": { "$value": "#D9D7D6", "$description": "photo stage bg" },
+        "300": { "$value": "#C8CDD1", "$description": "inverse secondary" },
+        "350": { "$value": "#B9C0C6", "$description": "inverse body" },
+        "400": { "$value": "#AEB4B9", "$description": "inverse muted / footer" },
+        "500": { "$value": "#8A9197", "$description": "placeholder icon (decorative only)" },
+        "600": { "$value": "#626A71", "$description": "ink-3 muted text" },
+        "700": { "$value": "#4A5157", "$description": "ink-2 secondary text" },
+        "750": { "$value": "#3B4247", "$description": "caption on light chip" },
+        "800": { "$value": "#2C353C", "$description": "dark-line" },
+        "850": { "$value": "#1A2228", "$description": "dark-2 raised surface" },
+        "900": { "$value": "#0E1418", "$description": "INK / dark surface" },
+        "950": { "$value": "#06070F", "$description": "mega card photo bg" }
+      },
+      "green": {
+        "100": { "$value": "#CDEBD8", "$description": "live label on dark" },
+        "400": { "$value": "#3DDC84", "$description": "live dot" },
+        "600": { "$value": "#1A7F45", "$description": "WhatsApp (was #1F8F4E, darkened for AA 5.0:1)" },
+        "700": { "$value": "#18763F", "$description": "WhatsApp hover" }
+      },
+      "red": {
+        "50":  { "$value": "#FEF3F2", "$description": "Generated — danger bg" },
+        "600": { "$value": "#B42318", "$description": "Form error" }
+      },
+      "amber": {
+        "50":  { "$value": "#FFF6D6", "$description": "Notice bg" },
+        "400": { "$value": "#D9B44A", "$description": "Notice border" },
+        "800": { "$value": "#7A5A00", "$description": "Notice text" }
+      },
+      "blue": {
+        "50":  { "$value": "#EEF4FB", "$description": "Generated — info bg" },
+        "600": { "$value": "#1F5FA8", "$description": "Generated — info (6.4:1 on white)" }
+      },
+      "alpha": {
+        "white-03": { "$value": "rgba(255,255,255,.03)" },
+        "white-04": { "$value": "rgba(255,255,255,.04)" },
+        "white-06": { "$value": "rgba(255,255,255,.06)" },
+        "white-08": { "$value": "rgba(255,255,255,.08)" },
+        "white-10": { "$value": "rgba(255,255,255,.10)" },
+        "white-14": { "$value": "rgba(255,255,255,.14)" },
+        "white-16": { "$value": "rgba(255,255,255,.16)" },
+        "white-22": { "$value": "rgba(255,255,255,.22)" },
+        "white-30": { "$value": "rgba(255,255,255,.30)" },
+        "white-50": { "$value": "rgba(255,255,255,.50)" },
+        "white-55": { "$value": "rgba(255,255,255,.55)" },
+        "white-78": { "$value": "rgba(255,255,255,.78)" },
+        "white-82": { "$value": "rgba(255,255,255,.82)" },
+        "white-86": { "$value": "rgba(255,255,255,.86)" },
+        "ink-08":   { "$value": "rgba(14,20,24,.08)" },
+        "ink-25":   { "$value": "rgba(14,20,24,.25)" },
+        "ink-55":   { "$value": "rgba(14,20,24,.55)" },
+        "ink-70":   { "$value": "rgba(14,20,24,.70)" },
+        "purple-08": { "$value": "rgba(93,68,125,.08)" },
+        "purple-10": { "$value": "rgba(120,91,163,.10)" },
+        "purple-18": { "$value": "rgba(93,68,125,.18)" },
+        "purple-22": { "$value": "rgba(93,68,125,.22)" },
+        "purple-28": { "$value": "rgba(93,68,125,.28)" },
+        "purple-35": { "$value": "rgba(205,189,227,.35)" },
+        "green-12":  { "$value": "rgba(26,127,69,.12)" },
+        "live-55":   { "$value": "rgba(61,220,132,.55)", "$description": "Live dot pulse start" },
+        "live-00":   { "$value": "rgba(61,220,132,0)", "$description": "Live dot pulse end" }
+      }
+    },
+
+    "semantic": {
+      "$type": "color",
+      "bg":                 { "$value": "{color.primitive.white}" },
+      "bg-soft":            { "$value": "{color.primitive.ink.50}",  "$description": "Alternate section (fleet, FAQ)" },
+      "bg-soft-2":          { "$value": "{color.primitive.ink.100}", "$description": "Hover on soft" },
+      "bg-photo":           { "$value": "{color.primitive.ink.250}", "$description": "Image stage while loading" },
+      "bg-inverse":         { "$value": "{color.primitive.ink.900}", "$description": "Trust strip, How, Footer, Comparison" },
+      "bg-inverse-raised":  { "$value": "{color.primitive.ink.850}" },
+      "bg-deep":            { "$value": "{color.primitive.purple.900}", "$description": "CTA band" },
+      "bg-glass":           { "$value": "{color.primitive.alpha.white-78}", "$description": "Header on scroll" },
+      "bg-glass-strong":    { "$value": "{color.primitive.alpha.white-86}", "$description": "Stat card on photo" },
+      "bg-overlay":         { "$value": "{color.primitive.alpha.ink-55}", "$description": "Modal backdrop" },
+
+      "text":               { "$value": "{color.primitive.ink.900}" },
+      "text-secondary":     { "$value": "{color.primitive.ink.700}" },
+      "text-muted":         { "$value": "{color.primitive.ink.600}" },
+      "text-on-brand":      { "$value": "{color.primitive.white}" },
+      "text-inverse":       { "$value": "{color.primitive.white}" },
+      "text-inverse-secondary": { "$value": "{color.primitive.ink.300}" },
+      "text-inverse-body":  { "$value": "{color.primitive.ink.350}" },
+      "text-inverse-muted": { "$value": "{color.primitive.ink.400}" },
+      "text-inverse-accent":{ "$value": "{color.primitive.purple.300}" },
+      "text-on-photo":      { "$value": "{color.primitive.ink.150}" },
+
+      "border":             { "$value": "{color.primitive.ink.200}" },
+      "border-strong":      { "$value": "{color.primitive.ink.900}" },
+      "border-inverse":     { "$value": "{color.primitive.alpha.white-10}" },
+      "border-inverse-strong": { "$value": "{color.primitive.ink.800}" },
+
+      "brand":              { "$value": "{color.primitive.purple.700}" },
+      "brand-hover":        { "$value": "{color.primitive.purple.650}" },
+      "brand-pressed":      { "$value": "{color.primitive.purple.800}" },
+      "brand-soft":         { "$value": "{color.primitive.alpha.purple-08}" },
+      "brand-line":         { "$value": "{color.primitive.alpha.purple-28}" },
+      "brand-halo":         { "$value": "{color.primitive.alpha.purple-22}" },
+      "focus-ring":         { "$value": "{color.primitive.alpha.purple-18}" },
+
+      "success":            { "$value": "{color.primitive.green.600}" },
+      "success-strong":     { "$value": "{color.primitive.green.700}" },
+      "success-soft":       { "$value": "{color.primitive.alpha.green-12}" },
+      "live":               { "$value": "{color.primitive.green.400}" },
+      "live-text":          { "$value": "{color.primitive.green.100}" },
+      "danger":             { "$value": "{color.primitive.red.600}" },
+      "danger-soft":        { "$value": "{color.primitive.red.50}" },
+      "warning":            { "$value": "{color.primitive.amber.800}" },
+      "warning-soft":       { "$value": "{color.primitive.amber.50}" },
+      "warning-line":       { "$value": "{color.primitive.amber.400}" },
+      "info":               { "$value": "{color.primitive.blue.600}" },
+      "info-soft":          { "$value": "{color.primitive.blue.50}" },
+
+      "whatsapp":           { "$value": "{color.primitive.green.600}", "$description": "White text ≈5.0:1 (AA)" },
+      "whatsapp-hover":     { "$value": "{color.primitive.green.700}" }
+    }
+  },
+
+  "gradient": {
+    "$type": "gradient",
+    "brand":        { "$value": "linear-gradient(180deg,{color.primitive.purple.600} 0%,{color.primitive.purple.700} 55%,{color.primitive.purple.800} 100%)", "$description": "Primary button" },
+    "brand-hover":  { "$value": "linear-gradient(180deg,{color.primitive.purple.500} 0%,{color.primitive.purple.650} 55%,{color.primitive.purple.750} 100%)" },
+    "icon":         { "$value": "linear-gradient(180deg,{color.primitive.purple.600},{color.primitive.purple.700})", "$description": "Icon tiles, trust & timeline nodes" },
+    "progress":     { "$value": "linear-gradient(90deg,{color.primitive.purple.400},{color.primitive.purple.700})", "$description": "Timeline line fill" },
+    "glow":         { "$value": "radial-gradient(closest-side,rgba(120,91,163,.45),rgba(93,68,125,.12) 55%,transparent 72%)", "$description": "Ornament: radial glow on dark sections" },
+    "scrim-hero":   { "$value": "linear-gradient(90deg,rgba(10,14,18,.78) 0%,rgba(10,14,18,.45) 38%,rgba(10,14,18,0) 65%),linear-gradient(0deg,rgba(10,14,18,.7) 0%,rgba(10,14,18,0) 35%),linear-gradient(180deg,rgba(10,14,18,.45) 0%,rgba(10,14,18,0) 18%)" },
+    "scrim-hero-mobile": { "$value": "linear-gradient(0deg,rgba(10,14,18,.9) 0%,rgba(10,14,18,.55) 45%,rgba(10,14,18,.15) 75%),linear-gradient(180deg,rgba(10,14,18,.5) 0%,rgba(10,14,18,0) 20%)" },
+    "scrim-card":   { "$value": "linear-gradient(90deg,rgba(6,7,15,.92) 0%,rgba(6,7,15,.72) 45%,rgba(6,7,15,.2) 100%),linear-gradient(0deg,rgba(6,7,15,.55) 0%,rgba(6,7,15,0) 45%)" },
+    "scrim-band":   { "$value": "linear-gradient(90deg,rgba(22,12,48,.88) 0%,rgba(22,12,48,.6) 40%,rgba(22,12,48,0) 70%)" },
+    "placeholder":  { "$value": "linear-gradient(180deg,#E9EAEB,#D4D7D9)" },
+    "placeholder-dark": { "$value": "linear-gradient(180deg,#2A3339,#12191E)" }
+  },
+
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "base": { "$value": "\"Albert Sans\",\"Helvetica Neue\",Arial,sans-serif" }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular":  { "$value": 400 },
+      "medium":   { "$value": 500 },
+      "semibold": { "$value": 600 },
+      "bold":     { "$value": 700 }
+    }
+  },
+
+  "text": {
+    "$type": "typography",
+    "display":  { "$value": { "fontSize": "clamp(2.2rem,min(3.5vw,6.8vh),4.3rem)", "lineHeight": "1.05", "letterSpacing": "-0.04em", "fontWeight": 600 }, "$description": "Hero headline (page H1) — scales with viewport height too" },
+    "h2-lg":    { "$value": { "fontSize": "clamp(2rem,1.3rem + 2.6vw,3.5rem)", "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": 600 }, "$description": "Large section title on dark (Cara sewa)" },
+    "h2":       { "$value": { "fontSize": "clamp(1.8rem,1.3rem + 1.8vw,2.75rem)", "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": 600 }, "$description": "Section title" },
+    "h3":       { "$value": { "fontSize": "clamp(1.15rem,1rem + .5vw,1.45rem)", "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": 600 }, "$description": "Sub-section / service tab" },
+    "title":    { "$value": { "fontSize": "1.35rem", "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": 600 }, "$description": "Card title (vehicle)" },
+    "title-sm": { "$value": { "fontSize": "1.15rem", "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": 600 }, "$description": "Small card / FAQ question" },
+    "lead":     { "$value": { "fontSize": "1.05rem", "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": 400 }, "$description": "Section intro, max 56ch" },
+    "body":     { "$value": { "fontSize": "1rem", "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": 400 } },
+    "body-sm":  { "$value": { "fontSize": ".93rem", "lineHeight": "1.55", "letterSpacing": "0", "fontWeight": 400 }, "$description": "Card description" },
+    "label":    { "$value": { "fontSize": ".88rem", "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": 600 }, "$description": "Form label, eyebrow" },
+    "caption":  { "$value": { "fontSize": ".8rem", "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": 400 }, "$description": "Hint, meta, price prefix" },
+    "numeral":  { "$value": { "fontSize": "2.75rem", "lineHeight": "1", "letterSpacing": "-0.04em", "fontWeight": 500 }, "$description": "Step counter 01–04" },
+    "stat":     { "$value": { "fontSize": "1.9rem", "lineHeight": "1.05", "letterSpacing": "-0.03em", "fontWeight": 600 }, "$description": "Stat card figure" }
+  },
+
+  "space": {
+    "$type": "dimension",
+    "0":  { "$value": "0" },
+    "1":  { "$value": ".25rem" },
+    "2":  { "$value": ".5rem" },
+    "3":  { "$value": ".75rem" },
+    "4":  { "$value": "1rem" },
+    "5":  { "$value": "1.25rem" },
+    "6":  { "$value": "1.5rem" },
+    "8":  { "$value": "2rem" },
+    "10": { "$value": "2.5rem" },
+    "12": { "$value": "3rem" },
+    "16": { "$value": "4rem" },
+    "20": { "$value": "5rem" },
+    "24": { "$value": "6rem" },
+    "32": { "$value": "8rem" },
+    "section": { "$value": "clamp(4rem,8vw,8rem)", "$description": "Vertical section padding" },
+    "gutter":  { "$value": "clamp(2rem,6vw,8rem)", "$description": "Total horizontal gutter (both sides)" },
+    "grid-gap":{ "$value": "clamp(1rem,2vw,1.5rem)" }
+  },
+
+  "size": {
+    "$type": "dimension",
+    "container":   { "$value": "1440px" },
+    "header":      { "$value": "72px" },
+    "control":     { "$value": "48px", "$description": "Min touch target for buttons/inputs" },
+    "control-sm":  { "$value": "44px" },
+    "icon-tile":   { "$value": "44px" },
+    "icon-node":   { "$value": "56px" },
+    "measure":     { "$value": "56ch", "$description": "Max line length for lead" }
+  },
+
+  "radius": {
+    "$type": "dimension",
+    "xs":   { "$value": "2px",  "$description": "Segment inner" },
+    "sm":   { "$value": "4px",  "$description": "DEFAULT — buttons, inputs, tags" },
+    "md":   { "$value": "8px",  "$description": "Cards, images, stages" },
+    "lg":   { "$value": "12px", "$description": "Icon tile" },
+    "xl":   { "$value": "16px", "$description": "Modal" },
+    "pill": { "$value": "999px", "$description": "Chips, FAB, eyebrow" },
+    "full": { "$value": "50%",   "$description": "Circular icon / nav button" }
+  },
+
+  "shadow": {
+    "$type": "shadow",
+    "hairline": { "$value": "0 0 0 1px rgba(14,20,24,.08)" },
+    "mega":     { "$value": "0 24px 40px rgba(14,20,24,.08)" },
+    "modal":    { "$value": "0 30px 80px rgba(14,20,24,.35)" },
+    "fab":      { "$value": "0 10px 28px rgba(14,20,24,.28)" },
+    "brand":    { "$value": "inset 0 1px 0 rgba(255,255,255,.22),0 8px 20px -8px rgba(93,68,125,.65)", "$description": "Primary button bevel + glow" },
+    "icon":     { "$value": "inset 0 1px 0 rgba(255,255,255,.25),0 0 0 6px rgba(93,68,125,.22)", "$description": "Ornament: halo ring" },
+    "focus":    { "$value": "0 0 0 3px rgba(93,68,125,.18)" }
+  },
+
+  "blur": {
+    "$type": "dimension",
+    "glass":   { "$value": "saturate(180%) blur(18px)" },
+    "panel":   { "$value": "blur(12px)" },
+    "overlay": { "$value": "blur(4px)" }
+  },
+
+  "motion": {
+    "ease":      { "$type": "cubicBezier", "$value": "cubic-bezier(.25,.1,.25,1)" },
+    "fast":      { "$type": "duration", "$value": "200ms", "$description": "Hover, color" },
+    "base":      { "$type": "duration", "$value": "300ms", "$description": "Header, accordion" },
+    "slow":      { "$type": "duration", "$value": "600ms", "$description": "Image zoom, panel fade" },
+    "slide":     { "$type": "duration", "$value": "900ms", "$description": "Hero crossfade" },
+    "kenburns":  { "$type": "duration", "$value": "7s",    "$description": "Hero image scale + autoplay" }
+  },
+
+  "breakpoint": {
+    "$type": "dimension",
+    "sm": { "$value": "520px" },
+    "md": { "$value": "760px" },
+    "lg": { "$value": "900px" },
+    "xl": { "$value": "1100px", "$description": "Desktop nav → burger drawer" }
+  },
+
+  "z": {
+    "$type": "number",
+    "drawer": { "$value": 39 },
+    "header": { "$value": 40 },
+    "fab":    { "$value": 45 },
+    "toast":  { "$value": 60 }
+  }
+}

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jennete Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens/tokens.css">
+<link rel="stylesheet" href="components.css">
+<script src="tokens/tokens.js"></script>
+<style>
+/* ---------- styleguide chrome (doc only, not part of the system) ---------- */
+html{scroll-padding-top:24px}
+.doc{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.doc-nav{position:sticky;top:0;height:100vh;overflow:auto;background:var(--color-bg-inverse);color:var(--color-text-inverse-muted);padding:1.5rem 1.25rem 3rem}
+.doc-nav .logo{color:var(--white);margin-bottom:2rem}
+.doc-nav h5{margin:1.5rem 0 .5rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-450);font-weight:var(--fw-semibold)}
+.doc-nav ul{list-style:none;margin:0;padding:0;display:grid;gap:.1rem}
+.doc-nav a{display:block;padding:.4rem .6rem;border-radius:var(--radius-sm);text-decoration:none;font-size:.92rem}
+.doc-nav a:hover{background:var(--alpha-white-06);color:var(--white)}
+.doc-nav a.on{background:var(--alpha-purple-28);color:var(--white)}
+.doc-main{min-width:0}
+.doc-sec{padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,4rem);border-bottom:1px solid var(--color-border)}
+.doc-sec>h2{margin-bottom:.5rem}
+.doc-sec>.lead{margin-bottom:2rem}
+.doc-sub{margin:3rem 0 1rem;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-muted);font-weight:var(--fw-semibold)}
+.doc-sub:first-of-type{margin-top:1rem}
+.demo{border:1px solid var(--color-border);border-radius:var(--radius-md);padding:clamp(1.25rem,3vw,2rem);background:var(--color-bg)}
+.demo.soft{background:var(--color-bg-soft);border-color:transparent}
+.demo.inverse{background:var(--color-bg-inverse);border-color:transparent;color:var(--white)}
+.demo.flush{padding:0;overflow:hidden}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+@media (max-width:900px){.grid-2,.grid-3{grid-template-columns:minmax(0,1fr)}}
+.spec{font-size:.8rem;color:var(--color-text-muted);margin-top:.75rem}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82em}
+code{background:var(--color-bg-soft);padding:.1rem .35rem;border-radius:var(--radius-xs)}
+.demo.inverse code,.cover code{background:var(--alpha-white-08)}
+.state-lbl{display:block;font-size:.72rem;color:var(--color-text-muted);margin-bottom:.4rem;font-weight:var(--fw-semibold)}
+/* swatches */
+.sw-group{margin-bottom:2rem}
+.sw-group h4{font-size:.95rem;margin-bottom:.75rem}
+.sw-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
+.sw{border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;cursor:pointer;background:var(--color-bg);text-align:left;padding:0;font:inherit;color:inherit}
+.sw i{display:block;height:64px;background-image:linear-gradient(45deg,var(--ink-50) 25%,transparent 25%,transparent 75%,var(--ink-50) 75%),linear-gradient(45deg,var(--ink-50) 25%,transparent 25%,transparent 75%,var(--ink-50) 75%);background-size:12px 12px;background-position:0 0,6px 6px;position:relative}
+.sw i::after{content:"";position:absolute;inset:0;background:var(--c)}
+.sw div{padding:.5rem .6rem .6rem;font-size:.72rem;line-height:1.35}
+.sw b{display:block;font-size:.78rem;font-weight:var(--fw-semibold);word-break:break-all}
+.sw span{color:var(--color-text-muted);display:block;word-break:break-all}
+.sw:hover{border-color:var(--color-brand)}
+.sw-row.wide{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.grad{height:88px;border-radius:var(--radius-md)}
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl th,.tbl td{text-align:left;padding:.75rem .75rem;border-bottom:1px solid var(--color-border);vertical-align:middle}
+.tbl th{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-muted);font-weight:var(--fw-semibold)}
+.tbl-scroll{overflow-x:auto}
+.bar-viz{height:14px;background:var(--color-brand);border-radius:2px}
+.rad-viz{width:64px;height:64px;background:var(--color-brand-soft);border:1.5px solid var(--color-brand)}
+.shadow-viz{height:96px;border-radius:var(--radius-md);background:var(--color-bg);display:grid;place-items:center;font-size:.8rem;color:var(--color-text-muted)}
+.pass{color:var(--color-success-strong);font-weight:var(--fw-semibold)}
+.fail{color:var(--color-danger);font-weight:var(--fw-semibold)}
+.copied{position:fixed;left:50%;top:1rem;transform:translateX(-50%);background:var(--color-bg-inverse);color:var(--white);padding:.5rem .9rem;border-radius:var(--radius-pill);font-size:.85rem;z-index:99;opacity:0;transition:opacity .2s}
+.copied.show{opacity:1}
+.cover{position:relative;overflow:hidden;isolation:isolate;background:var(--color-bg-inverse);color:var(--white);padding:clamp(4rem,8vw,7rem) clamp(1rem,4vw,4rem)}
+.cover::before{content:"";position:absolute;inset:-30% -15% auto auto;width:80vw;height:80vw;max-width:1000px;max-height:1000px;background:var(--gradient-glow);z-index:-1}
+.cover h1{font-size:var(--text-display-size);letter-spacing:var(--text-display-ls);line-height:var(--text-display-lh);max-width:14ch;margin-top:1.25rem}
+.cover p{color:var(--color-text-inverse-body);max-width:56ch;margin-top:1.25rem;font-size:1.1rem}
+.cover-facts{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--alpha-white-14)}
+.cover-facts strong{display:block;font-size:var(--text-stat-size);color:var(--white);letter-spacing:var(--text-stat-ls);font-weight:var(--fw-semibold)}
+.cover-facts span{font-size:.85rem;color:var(--color-text-inverse-muted)}
+.hero.demo-hero{height:620px;min-height:0;border-radius:var(--radius-md)}
+.doc-menu{display:none}
+@media (min-width:901px) and (max-width:1400px){#nav .mega-inner{grid-template-columns:1fr 1fr}}
+@media (max-width:1000px){
+  .doc{grid-template-columns:1fr}
+  .doc-nav{position:fixed;inset:0 30% 0 0;z-index:70;transform:translateX(-100%);transition:transform .3s var(--ease)}
+  .doc-nav.open{transform:none}
+  .doc-menu{display:inline-flex;position:fixed;left:1rem;top:1rem;z-index:71}
+  .cover{padding-top:5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- icon sprite (paths from the live site) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></g></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></g></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l2-6c.4-1.2 1.4-2 2.7-2h8.6c1.3 0 2.3.8 2.7 2l2 6"/><path d="M3 16h18v3H3zM6.5 19v1.5M17.5 19v1.5"/><circle cx="7.5" cy="13" r="1"/><circle cx="16.5" cy="13" r="1"/></g></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14"/><path d="M12 17.5h.01"/></g></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h3"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 32 32"><path fill="currentColor" stroke="none" d="M26.576 5.363c-2.69-2.69-6.406-4.354-10.511-4.354-8.209 0-14.865 6.655-14.865 14.865 0 2.732 0.737 5.291 2.022 7.491l-0.038-0.070-2.109 7.702 7.879-2.067c2.051 1.139 4.498 1.809 7.102 1.809h0.006c8.209-0.003 14.862-6.659 14.862-14.868 0-4.103-1.662-7.817-4.349-10.507l0 0zM16.062 28.228h-0.005c-0 0-0.001 0-0.001 0-2.319 0-4.489-0.64-6.342-1.753l0.056 0.031-0.451-0.267-4.675 1.227 1.247-4.559-0.294-0.467c-1.185-1.862-1.889-4.131-1.889-6.565 0-6.822 5.531-12.353 12.353-12.353s12.353 5.531 12.353 12.353c0 6.822-5.53 12.353-12.353 12.353h-0zM22.838 18.977c-0.371-0.186-2.197-1.083-2.537-1.208-0.341-0.124-0.589-0.185-0.837 0.187-0.246 0.371-0.958 1.207-1.175 1.455-0.216 0.249-0.434 0.279-0.805 0.094-1.15-0.466-2.138-1.087-2.997-1.852l0.010 0.009c-0.799-0.74-1.484-1.587-2.037-2.521l-0.028-0.052c-0.216-0.371-0.023-0.572 0.162-0.757 0.167-0.166 0.372-0.434 0.557-0.65 0.146-0.179 0.271-0.384 0.366-0.604l0.006-0.017c0.043-0.087 0.068-0.188 0.068-0.296 0-0.131-0.037-0.253-0.101-0.357l0.002 0.003c-0.094-0.186-0.836-2.014-1.145-2.758-0.302-0.724-0.609-0.625-0.836-0.637-0.216-0.010-0.464-0.012-0.712-0.012-0.395 0.010-0.746 0.188-0.988 0.463l-0.001 0.002c-0.802 0.761-1.3 1.834-1.3 3.023 0 0.026 0 0.053 0.001 0.079l-0-0.004c0.131 1.467 0.681 2.784 1.527 3.857l-0.012-0.015c1.604 2.379 3.742 4.282 6.251 5.564l0.094 0.043c0.548 0.248 1.25 0.513 1.968 0.74l0.149 0.041c0.442 0.14 0.951 0.221 1.479 0.221 0.303 0 0.601-0.027 0.889-0.078l-0.031 0.004c1.069-0.223 1.956-0.868 2.497-1.749l0.009-0.017c0.165-0.366 0.261-0.793 0.261-1.242 0-0.185-0.016-0.366-0.047-0.542l0.003 0.019c-0.092-0.155-0.34-0.247-0.712-0.434z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></g></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3v14H7zM14 5h3v14h-3z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<button class="icon-btn neutral doc-menu" id="docMenu" aria-label="Buka navigasi" aria-expanded="false" style="background:var(--color-bg)"><svg><use href="#i-menu"/></svg></button>
+
+<div class="doc">
+<nav class="doc-nav" id="docNav" aria-label="Isi design system">
+  <a class="logo" href="#top"><span class="logo-badge"><img src="assets/logo-mark.png" alt="" width="40" height="40"></span><span class="logo-word">Jennete <span>Rent</span></span></a>
+  <h5>Foundation</h5>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#color">Color</a></li>
+    <li><a href="#type">Typography</a></li>
+    <li><a href="#space">Spacing &amp; Layout</a></li>
+    <li><a href="#radius">Radius, Shadow, Motion</a></li>
+    <li><a href="#ornament">Ornamen &amp; Visual</a></li>
+  </ul>
+  <h5>Components</h5>
+  <ul>
+    <li><a href="#buttons">Button &amp; Link</a></li>
+    <li><a href="#forms">Form controls</a></li>
+    <li><a href="#tags">Tag, Chip, Badge</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#nav">Header &amp; Mega menu</a></li>
+    <li><a href="#interactive">Tabs, Accordion, Dropdown</a></li>
+    <li><a href="#overlay">Modal &amp; Toast</a></li>
+  </ul>
+  <h5>Patterns</h5>
+  <ul>
+    <li><a href="#hero">Hero banner</a></li>
+    <li><a href="#sections">Trust, Service, Steps</a></li>
+    <li><a href="#how">How timeline</a></li>
+    <li><a href="#compare">Comparison table</a></li>
+    <li><a href="#cta">CTA band &amp; Footer</a></li>
+  </ul>
+  <h5>Guidelines</h5>
+  <ul>
+    <li><a href="#a11y">Aksesibilitas</a></li>
+    <li><a href="#usage">Cara pakai</a></li>
+  </ul>
+</nav>
+
+<main class="doc-main" id="top">
+
+<!-- ===================== COVER ===================== -->
+<header class="cover" id="overview">
+  <span class="chip accent">Design System · v1.0</span>
+  <h1>Jennete Rent Design System</h1>
+  <p>Fondasi visual untuk situs sewa mobil jangka panjang korporat. Semua token, komponen, dan ornamen di sini diambil dari situs yang sudah berjalan: <code>index.html</code>, <code>solusi-bisnis.html</code>, dan <code>wuling-cortez-darion.html</code>. Karakternya Corporate Professional dengan aksen ungu premium.</p>
+  <div class="cover-facts">
+    <div><strong id="cntColor">—</strong><span>color tokens</span></div>
+    <div><strong id="cntType">—</strong><span>text styles</span></div>
+    <div><strong id="cntAll">—</strong><span>total tokens</span></div>
+    <div><strong>30+</strong><span>komponen &amp; pattern</span></div>
+  </div>
+  <div class="hero-cta"><a class="btn btn-primary" href="#color">Lihat foundation <svg><use href="#i-arrow"/></svg></a><a class="btn btn-ghost-w" href="#usage">Cara pakai</a></div>
+</header>
+
+<!-- ===================== COLOR ===================== -->
+<section class="doc-sec" id="color">
+  <h2>Color</h2>
+  <p class="lead">Dua lapis token. <b>Primitive</b> menyimpan nilai mentah, <b>semantic</b> menyimpan makna (bg, text, border, brand, status). Komponen hanya memakai token semantic. Klik swatch untuk menyalin nama variabelnya.</p>
+  <div id="swPrimitive"></div>
+  <h3 class="doc-sub">Semantic</h3>
+  <div id="swSemantic"></div>
+  <h3 class="doc-sub">Gradien &amp; scrim</h3>
+  <div class="sw-row wide" id="swGradient"></div>
+  <h3 class="doc-sub">Aturan pemakaian</h3>
+  <div class="grid-3">
+    <div class="card"><h3>Ungu = aksi</h3><p>Brand <code>#5D447D</code> dipakai untuk CTA utama, state terpilih, ikon, dan link "lihat semua". Jangan dipakai untuk blok teks panjang atau latar section penuh.</p></div>
+    <div class="card"><h3>Ink = struktur</h3><p>Hampir semua UI dibangun dari ink + putih. Section gelap (<code>bg-inverse</code>) dipakai untuk memberi ritme: trust strip, cara sewa, komparasi, footer.</p></div>
+    <div class="card"><h3>Hijau = WhatsApp</h3><p>Hijau <code>#1A7F45</code> khusus untuk kanal WhatsApp dan indikator "live". Status sukses di form memakai token yang sama.</p></div>
+  </div>
+</section>
+
+<!-- ===================== TYPOGRAPHY ===================== -->
+<section class="doc-sec" id="type">
+  <h2>Typography</h2>
+  <p class="lead"><b>Albert Sans</b> (400 · 500 · 600 · 700) untuk heading dan body. Heading memakai 600 dengan tracking rapat (-0.02 sampai -0.04em). Ukuran memakai <code>clamp()</code> agar fluid dari 375px sampai 1440px.</p>
+  <div class="demo">
+    <div class="row" style="gap:2.5rem;align-items:flex-end">
+      <div><div style="font-size:5rem;font-weight:600;letter-spacing:-.04em;line-height:1">Aa</div><div class="spec">Albert Sans</div></div>
+      <div style="font-size:1.4rem;line-height:1.5"><span style="font-weight:400">Regular 400</span> · <span style="font-weight:500">Medium 500</span> · <span style="font-weight:600">Semibold 600</span> · <span style="font-weight:700">Bold 700</span><div class="t-caption">ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · <span class="num">0123456789 Rp1.500.000</span></div></div>
+    </div>
+  </div>
+  <h3 class="doc-sub">Type scale</h3>
+  <div class="tbl-scroll"><table class="tbl" id="typeTbl"><thead><tr><th style="width:48%">Contoh</th><th>Token</th><th>Size</th><th>LH</th><th>Tracking</th><th>Weight</th></tr></thead><tbody></tbody></table></div>
+  <h3 class="doc-sub">Pola teks</h3>
+  <div class="grid-2">
+    <div class="demo">
+      <span class="chip light">Untuk perusahaan &amp; instansi</span>
+      <h2 style="margin-top:1rem;max-width:14ch">Armada pilihan untuk operasional bisnis</h2>
+      <p class="lead" style="margin-top:.75rem">Section heading selalu diikuti lead paragraph dengan maksimal 56 karakter per baris.</p>
+    </div>
+    <div class="demo">
+      <div class="t-numeral">01</div>
+      <h3 style="margin-top:1rem">Kirim kebutuhan</h3>
+      <p class="secondary" style="margin-top:.5rem;max-width:30ch">Angka besar dengan weight 500 dan warna muted menandai urutan langkah.</p>
+      <div class="vprice" style="max-width:280px"><div><small>Mulai</small><strong>Rp1.500.000/hari</strong></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPACING ===================== -->
+<section class="doc-sec" id="space">
+  <h2>Spacing &amp; Layout</h2>
+  <p class="lead">Grid dasar 4px. Section memakai padding fluid <code>clamp(4rem, 8vw, 8rem)</code>. Container maksimal 1440px dengan gutter fluid.</p>
+  <div class="grid-2">
+    <div class="tbl-scroll"><table class="tbl" id="spaceTbl"><thead><tr><th>Token</th><th>Value</th><th style="width:50%"></th></tr></thead><tbody></tbody></table></div>
+    <div>
+      <table class="tbl"><thead><tr><th>Breakpoint</th><th>Min/Max</th><th>Perubahan</th></tr></thead><tbody>
+        <tr><td><code>sm</code></td><td>520px</td><td>CTA header disembunyikan, form 1 kolom</td></tr>
+        <tr><td><code>md</code></td><td>760px</td><td>Hero stack vertikal, trust 1 kolom</td></tr>
+        <tr><td><code>lg</code></td><td>900px</td><td>Grid 3 → 1, steps 2 kolom, timeline vertikal</td></tr>
+        <tr><td><code>xl</code></td><td>1100px</td><td>Nav desktop → burger + drawer</td></tr>
+        <tr><td>container</td><td>1440px</td><td><code>.wrap</code></td></tr>
+      </tbody></table>
+      <table class="tbl" style="margin-top:1.5rem"><thead><tr><th>Size</th><th>Value</th><th>Dipakai di</th></tr></thead><tbody>
+        <tr><td><code>--size-control</code></td><td>48px</td><td>Tinggi minimum button &amp; input (touch target)</td></tr>
+        <tr><td><code>--size-control-sm</code></td><td>44px</td><td>Button di header, segmented</td></tr>
+        <tr><td><code>--size-header</code></td><td>72px</td><td>Tinggi bar header</td></tr>
+        <tr><td><code>--size-icon-node</code></td><td>56px</td><td>Node timeline</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RADIUS / SHADOW / MOTION ===================== -->
+<section class="doc-sec" id="radius">
+  <h2>Radius, Shadow, Motion</h2>
+  <p class="lead">Radius kecil memberi kesan korporat yang tegas. Bayangan dipakai hemat: glow ungu hanya di CTA utama dan ikon. Gerak memakai satu easing dengan durasi pendek.</p>
+  <h3 class="doc-sub">Radius</h3>
+  <div class="row" style="gap:1.5rem" id="radiusRow"></div>
+  <h3 class="doc-sub">Elevation</h3>
+  <div class="grid-3" id="shadowGrid"></div>
+  <h3 class="doc-sub">Motion</h3>
+  <table class="tbl"><thead><tr><th>Token</th><th>Value</th><th>Pemakaian</th></tr></thead><tbody id="motionTbl"></tbody></table>
+  <p class="spec">Semua animasi dimatikan saat <code>prefers-reduced-motion: reduce</code>.</p>
+</section>
+
+<!-- ===================== ORNAMENT ===================== -->
+<section class="doc-sec" id="ornament">
+  <h2>Ornamen &amp; Visual</h2>
+  <p class="lead">Ornamen khas Jennete sedikit dan konsisten. Fotografi kendaraan dan servis menjadi visual utama. Ungu muncul sebagai cahaya, halo, dan gradien halus, tidak pernah sebagai blok datar yang besar.</p>
+  <div class="grid-3">
+    <div>
+      <div class="demo inverse glow" style="min-height:220px;display:grid;place-items:center"><span class="chip accent">Radial glow</span></div>
+      <p class="spec"><code>.glow</code>: radial ungu di pojok kanan atas section gelap (Cara sewa, cover).</p>
+    </div>
+    <div>
+      <div class="demo inverse" style="min-height:220px;display:flex;gap:1.5rem;align-items:center;justify-content:center">
+        <span class="ic-halo"><svg><use href="#i-shield"/></svg></span>
+        <span class="ic-tile lg solid"><svg><use href="#i-phone"/></svg></span>
+        <span class="ic-tile"><svg><use href="#i-doc"/></svg></span>
+      </div>
+      <p class="spec"><code>.ic-halo</code> · <code>.ic-tile.lg.solid</code> · <code>.ic-tile</code>: gradien ikon + cincin halo 6px.</p>
+    </div>
+    <div>
+      <div class="pic" style="aspect-ratio:4/3"><img src="assets/service-1.jpg" alt="Teknisi memeriksa mobil di bengkel"><div class="stat-card" style="position:absolute;left:1rem;bottom:1rem"><strong>10.000 km</strong><span>atau 6 bulan, mana yang lebih dulu</span></div></div>
+      <p class="spec">Glass stat card di atas foto: <code>bg-glass-strong</code> + <code>blur-panel</code>.</p>
+    </div>
+  </div>
+  <h3 class="doc-sub">Fotografi</h3>
+  <div class="grid-3">
+    <div><div class="pic" style="aspect-ratio:16/9"><img src="assets/hero-1.jpg" alt=""></div><p class="spec"><b>16:9 · Hero / Blog.</b> Suasana nyata (bengkel, kantor, jalan), cahaya natural, ada ruang negatif di kiri untuk teks.</p></div>
+    <div><div class="pic" style="aspect-ratio:4/3;background:var(--color-bg-photo)"><img src="assets/fleet-1.jpg" alt=""></div><p class="spec"><b>4:3 · Armada.</b> Mobil 3/4 depan, latar studio terang dan netral, posisi konsisten antar unit.</p></div>
+    <div><div class="pic" style="aspect-ratio:4/3"><span class="cap">Placeholder foto</span><svg class="car" viewBox="0 0 200 80" style="width:70%;opacity:.6"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M14 58h12M66 58h68M174 58h12V40c0-5-3-8-8-9l-24-3-18-18H60L42 28H22c-5 0-8 3-8 8z"/><circle cx="46" cy="58" r="13"/><circle cx="154" cy="58" r="13"/></g></svg></div><p class="spec"><b>Placeholder.</b> <code>.pic</code> dengan gradien abu-abu + garis mobil, dipakai saat foto belum tersedia.</p></div>
+  </div>
+  <h3 class="doc-sub">Ikonografi</h3>
+  <div class="demo"><div class="row" style="gap:1.5rem;color:var(--color-text-secondary)" id="iconRow"></div><p class="spec">Stroke 1.7 sampai 2px, round cap/join, viewBox 24, warna <code>currentColor</code>. Ukuran 16px inline, 21 sampai 24px dalam tile.</p></div>
+</section>
+
+<!-- ===================== BUTTONS ===================== -->
+<section class="doc-sec" id="buttons">
+  <h2>Button &amp; Link</h2>
+  <p class="lead">Satu CTA utama per area (gradien ungu). Aksi sekunder memakai outline. Di atas foto atau section gelap, pakai varian white dan ghost-white.</p>
+  <h3 class="doc-sub">Varian × state</h3>
+  <div class="demo">
+    <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Varian</th><th>Default</th><th>Hover</th><th>Disabled</th><th>Loading</th></tr></thead><tbody>
+      <tr><td><code>.btn-primary</code></td><td><button class="btn btn-primary">Minta Penawaran</button></td><td><button class="btn btn-primary" style="background:var(--gradient-brand-hover)">Minta Penawaran</button></td><td><button class="btn btn-primary" disabled>Minta Penawaran</button></td><td><button class="btn btn-primary is-loading">Minta Penawaran</button></td></tr>
+      <tr><td><code>.btn-outline</code></td><td><button class="btn btn-outline">Lihat semua mobil</button></td><td><button class="btn btn-outline" style="background:var(--color-brand);color:var(--white)">Lihat semua mobil</button></td><td><button class="btn btn-outline" disabled>Lihat semua mobil</button></td><td><button class="btn btn-outline is-loading">Lihat semua mobil</button></td></tr>
+      <tr><td><code>.btn-wa</code></td><td><button class="btn btn-wa"><svg><use href="#i-wa"/></svg>Chat WhatsApp</button></td><td><button class="btn btn-wa" style="background:var(--color-whatsapp-hover)"><svg><use href="#i-wa"/></svg>Chat WhatsApp</button></td><td><button class="btn btn-wa" disabled>Chat WhatsApp</button></td><td><button class="btn btn-wa is-loading">Chat WhatsApp</button></td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="demo inverse" style="margin-top:1rem">
+    <span class="state-lbl" style="color:var(--color-text-inverse-muted)">Di atas section gelap / foto</span>
+    <div class="row"><button class="btn btn-white">Lihat layanan</button><button class="btn btn-ghost-w">Bantuan darurat 24/7</button><button class="btn btn-primary">Minta Penawaran</button><button class="icon-btn on-dark" aria-label="Sebelumnya"><svg><use href="#i-left"/></svg></button><button class="icon-btn on-dark" aria-label="Jeda"><svg><use href="#i-pause"/></svg></button></div>
+  </div>
+  <h3 class="doc-sub">Ukuran, icon button, link</h3>
+  <div class="demo"><div class="row">
+    <button class="btn btn-primary btn-sm">Small 44px</button>
+    <button class="btn btn-outline btn-sm">Menu</button>
+    <button class="icon-btn" aria-label="Sebelumnya"><svg><use href="#i-left"/></svg></button>
+    <button class="icon-btn" aria-label="Berikutnya"><svg><use href="#i-right"/></svg></button>
+    <button class="icon-btn" disabled aria-label="Disabled"><svg><use href="#i-left"/></svg></button>
+    <button class="icon-btn neutral" aria-label="Tutup"><svg><use href="#i-x"/></svg></button>
+    <a class="link" href="#buttons">Lihat detail <svg><use href="#i-arrow"/></svg></a>
+    <a class="link" href="#buttons" style="color:var(--color-brand)">Pelajari solusi <svg><use href="#i-arrow"/></svg></a>
+  </div></div>
+</section>
+
+<!-- ===================== FORMS ===================== -->
+<section class="doc-sec" id="forms">
+  <h2>Form controls</h2>
+  <p class="lead">Diambil dari modal "Minta Penawaran" dan "Reservasi". Tinggi minimum 48px, border 1.5px, fokus berupa border ungu + ring 3px.</p>
+  <div class="grid-2">
+    <div class="demo" style="display:grid;gap:1.1rem">
+      <div class="fm-field"><label for="f1">Nama perusahaan</label><input id="f1" placeholder="PT Contoh Sejahtera"></div>
+      <div class="fm-field"><label for="f2">Email kantor</label><input id="f2" type="email" value="budi@" aria-invalid="true" aria-describedby="f2e"><span class="fm-err" id="f2e"><svg width="14" height="14"><use href="#i-alert"/></svg>Format email belum lengkap</span></div>
+      <div class="fm-row">
+        <div class="fm-field"><label for="f3">Jenis kendaraan</label><select id="f3"><option>SUV</option><option>MPV</option><option>Sedan</option></select></div>
+        <div class="fm-field"><label for="f4">Kota <span class="fm-opt">(otomatis)</span></label><input id="f4" value="Jakarta" disabled></div>
+      </div>
+      <div class="fm-field"><label for="f5">Catatan <span class="fm-opt">(opsional)</span></label><textarea id="f5" placeholder="Kebutuhan sopir, jadwal antar, dsb."></textarea><span class="fm-hint">Maksimal 500 karakter.</span></div>
+    </div>
+    <div class="demo" style="display:grid;gap:1.25rem">
+      <fieldset class="fm-field"><legend>Tipe penyewa</legend>
+        <div class="fm-seg"><label><input type="radio" name="seg" checked><span>Perusahaan</span></label><label><input type="radio" name="seg"><span>Perorangan</span></label></div>
+      </fieldset>
+      <fieldset class="fm-field"><legend>Durasi sewa</legend>
+        <div class="fm-chips"><label><input type="radio" name="dur"><span>1 bulan</span></label><label><input type="radio" name="dur" checked><span>12 bulan</span></label><label><input type="radio" name="dur"><span>24 bulan</span></label><label><input type="radio" name="dur"><span>36 bulan</span></label><label><input type="radio" name="dur" disabled><span>60 bulan</span></label></div>
+      </fieldset>
+      <div class="fm-field"><label for="qty">Jumlah unit</label><div class="fm-step"><button type="button" aria-label="Kurangi" data-step="-1">−</button><input id="qty" type="number" value="5" min="1"><button type="button" aria-label="Tambah" data-step="1">+</button></div></div>
+      <label class="fm-toggle"><input type="checkbox" checked><span class="fm-switch"></span><span>Termasuk sopir<small>Pengemudi berpengalaman dari Jennete Rent</small></span></label>
+      <label class="fm-toggle is-off"><input type="checkbox" disabled><span class="fm-switch"></span><span>Antar ke luar kota<small>Tidak tersedia untuk paket ini</small></span></label>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAGS ===================== -->
+<section class="doc-sec" id="tags">
+  <h2>Tag, Chip, Badge</h2>
+  <p class="lead">Tag kotak (radius 4) untuk atribut kendaraan. Chip pill untuk eyebrow atau label kategori. Badge berwarna hanya untuk status.</p>
+  <div class="grid-2">
+    <div class="demo"><span class="state-lbl">Tag atribut</span><div class="tags"><span class="tag">Listrik</span><span class="tag">MPV</span><span class="tag">7 kursi</span><span class="tag brand">Terlaris</span></div>
+      <span class="state-lbl" style="margin-top:1.25rem">Badge status</span><div class="row"><span class="badge success">Tersedia</span><span class="badge warning">Inden 2 minggu</span><span class="badge danger">Tidak tersedia</span><span class="badge info">Baru</span><span class="badge brand">e-Katalog LKPP</span><span class="badge neutral">Draft</span></div>
+      <span class="state-lbl" style="margin-top:1.25rem">Notice &amp; chip terang</span><div class="row"><span class="notice">Foto placeholder, ganti sebelum live</span><span class="chip light">Untuk perusahaan</span></div>
+    </div>
+    <div class="demo inverse"><span class="state-lbl" style="color:var(--color-text-inverse-muted)">Di atas gelap / foto</span><div class="row"><span class="chip">Baru</span><span class="chip accent">Cara sewa untuk perusahaan</span><span class="live"><i></i>Tim darurat online</span></div>
+      <div class="eyebrow" style="margin-top:1.5rem">Layanan purna sewa <span class="chip">24/7</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CARDS ===================== -->
+<section class="doc-sec" id="cards">
+  <h2>Cards</h2>
+  <p class="lead">Card memakai radius 8px dan tidak memakai shadow. Pemisahnya datang dari kontras latar (putih di atas <code>bg-soft</code>). Hover: foto zoom 1.04 dan judul ber-underline.</p>
+  <h3 class="doc-sub">Vehicle card + rail</h3>
+  <div class="demo soft">
+    <div class="rail" id="rail">
+      <a class="vcard" href="#cards"><div class="pic"><img src="assets/fleet-1.jpg" alt="Wuling Cortez Darion"></div><div class="vbody"><div class="tags"><span class="tag">Listrik</span><span class="tag">MPV</span></div><h3>Wuling Cortez Darion</h3><p class="desc">MPV keluarga dan operasional, 7 kursi, otomatis</p><div class="vprice"><div><small>Mulai</small><strong>Rp1.500.000/hari</strong></div><span class="link">Lihat detail <svg><use href="#i-arrow"/></svg></span></div></div></a>
+      <a class="vcard" href="#cards"><div class="pic"><img src="assets/fleet-2.jpg" alt="Chery Tiggo 8 CSH"></div><div class="vbody"><div class="tags"><span class="tag">PHEV</span><span class="tag">SUV</span></div><h3>Chery Tiggo 8 CSH</h3><p class="desc">SUV 7 kursi, 1.500 cc PHEV, otomatis</p><div class="vprice"><div><small>Mulai</small><strong>Rp1.500.000/hari</strong></div><span class="link">Lihat detail <svg><use href="#i-arrow"/></svg></span></div></div></a>
+      <a class="vcard all" href="#cards"><span class="link"><svg><use href="#i-arrow"/></svg>Lihat semua mobil</span></a>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:1.5rem"><div class="seg" role="tablist"><button role="tab" aria-selected="true">Mobil</button><button role="tab" aria-selected="false">Motor</button></div><div class="rail-ctrl"><button class="icon-btn" data-rail="-1" aria-label="Sebelumnya"><svg><use href="#i-left"/></svg></button><button class="icon-btn" data-rail="1" aria-label="Berikutnya"><svg><use href="#i-right"/></svg></button></div></div>
+  </div>
+  <h3 class="doc-sub">Feature, blog, promo, basic</h3>
+  <div class="grid-3">
+    <div class="usp"><div class="pic"><img src="assets/service-1.jpg" alt=""></div><h3>Servis berkala terjadwal</h3><p>Tiap 10.000 km atau 6 bulan. Tim kami mengingatkan sebelum jadwalnya tiba.</p></div>
+    <a class="post" href="#cards"><div class="pic"><img src="assets/blog-1.jpg" alt=""></div><time>12 Okt 2026</time><h3>Sewa atau beli mobil operasional: hitungan untuk perusahaan</h3></a>
+    <div class="promo-card" style="background-image:url(assets/sos-card.jpg)"><span class="ic-tile lg solid"><svg><use href="#i-phone"/></svg></span><h3>Bantuan darurat di jalan 24/7</h3><p>Derek, ban kempes, atau mogok. Tim kami datang ke lokasi.</p><span class="live"><i></i>Tim darurat online</span><a class="btn btn-white btn-sm" href="#cards">0888-1111-508</a></div>
+  </div>
+  <div class="grid-3" style="margin-top:1.5rem">
+    <div class="card"><span class="ic-tile"><svg><use href="#i-doc"/></svg></span><h3>Card default</h3><p>Border 1px, latar putih. Untuk konten informatif.</p></div>
+    <div class="card soft"><span class="ic-tile"><svg><use href="#i-cal"/></svg></span><h3>Card soft</h3><p>Untuk dipakai di atas latar putih.</p></div>
+    <div class="card inverse"><span class="ic-halo"><svg><use href="#i-shield"/></svg></span><h3>Card inverse</h3><p>Untuk highlight atau mega menu.</p></div>
+  </div>
+</section>
+
+<!-- ===================== NAV ===================== -->
+<section class="doc-sec" id="nav">
+  <h2>Header &amp; Mega menu</h2>
+  <p class="lead">Header punya tiga state. <b>Transparent</b> di atas hero (teks putih), <b>glass</b> saat scroll (putih 78% + blur 18px), dan <b>solid</b> di halaman tanpa hero. Mega menu turun penuh lebar dengan 3 kolom tautan ber-ikon dan satu kartu promo.</p>
+  <span class="state-lbl">State: transparent (di atas foto)</span>
+  <div class="demo flush" style="background:url(assets/hero-2.jpg) center 40%/cover"><header class="site is-static"><div class="wrap bar"><a class="logo" href="#nav"><span class="logo-badge"><img src="assets/logo-mark.png" alt="" width="40" height="40"></span><span class="logo-word">Jennete <span>Rent</span></span></a><nav class="main"><ul><li class="nav-item"><a href="#nav" aria-current="page">Beranda</a></li><li class="nav-item"><button>Solusi Bisnis <svg><use href="#i-chev"/></svg></button></li><li class="nav-item"><button>Armada <svg><use href="#i-chev"/></svg></button></li><li class="nav-item"><button>Bantuan <svg><use href="#i-chev"/></svg></button></li></ul></nav><div class="bar-cta"><a class="btn btn-outline btn-sm" href="#nav">Hubungi kami</a><a class="btn btn-primary btn-sm" href="#nav">Minta Penawaran</a></div></div></header><div style="height:120px"></div></div>
+  <span class="state-lbl" style="margin-top:1.25rem">State: glass (scrolled) + mega menu terbuka</span>
+  <div class="demo flush soft">
+    <header class="site scrolled is-static"><div class="wrap bar"><a class="logo" href="#nav"><span class="logo-badge"><img src="assets/logo-mark.png" alt="" width="40" height="40"></span><span class="logo-word">Jennete <span>Rent</span></span></a><nav class="main"><ul><li class="nav-item"><a href="#nav">Beranda</a></li><li class="nav-item"><button>Solusi Bisnis <svg><use href="#i-chev"/></svg></button></li><li class="nav-item"><button>Armada <svg><use href="#i-chev"/></svg></button></li><li class="nav-item"><button aria-expanded="true">Bantuan <svg><use href="#i-chev"/></svg></button></li></ul></nav><div class="bar-cta"><a class="btn btn-outline btn-sm" href="#nav">Hubungi kami</a><a class="btn btn-primary btn-sm" href="#nav">Minta Penawaran</a></div></div></header>
+    <div class="mega"><div class="wrap mega-inner">
+      <div><h4>Sebelum menyewa</h4><ul><li><a class="hl" href="#nav"><span class="ic-tile"><svg><use href="#i-help"/></svg></span><span><b>Pertanyaan umum (FAQ)</b><small>Harga, durasi, dan layanan</small></span></a></li><li><a class="hl" href="#nav"><span class="ic-tile"><svg><use href="#i-doc"/></svg></span><span><b>Cara sewa untuk perusahaan</b><small>Empat langkah sampai unit diantar</small></span></a></li></ul></div>
+      <div><h4>Selama menyewa</h4><ul><li><a class="hl" href="#nav"><span class="ic-tile"><svg><use href="#i-cal"/></svg></span><span><b>Jadwal servis berkala</b><small>Tiap 10.000 km atau 6 bulan</small></span></a></li><li><a class="hl" href="#nav"><span class="ic-tile"><svg><use href="#i-pin"/></svg></span><span><b>Jaringan bengkel resmi</b><small>Bengkel ATPM di seluruh Indonesia</small></span></a></li></ul></div>
+      <div><h4>Informasi</h4><ul><li><a class="hl" href="#nav"><span class="ic-tile"><svg><use href="#i-phone"/></svg></span><span><b>Kontak &amp; lokasi kantor</b><small>Alamat, telepon, dan jam kerja</small></span></a></li></ul></div>
+      <div class="promo-card" style="background-image:url(assets/sos-card.jpg)"><span class="ic-tile lg solid"><svg><use href="#i-phone"/></svg></span><h3>Bantuan darurat 24/7</h3><span class="live"><i></i>Tim darurat online</span><a class="btn btn-white btn-sm" href="#nav">Hubungi sekarang</a></div>
+    </div></div>
+  </div>
+  <div class="grid-2" style="margin-top:1.5rem">
+    <div><span class="state-lbl">Drawer mobile (&lt; 1100px)</span><div class="demo" style="max-width:375px"><ul class="drawer-list"><li><a href="#nav">Beranda</a></li><li><button>Solusi Bisnis <svg><use href="#i-chev"/></svg></button></li><li><button>Armada <svg><use href="#i-chev"/></svg></button></li><li><button>Bantuan <svg><use href="#i-chev"/></svg></button></li></ul><button class="btn btn-primary btn-block" style="margin-top:1.25rem">Minta Penawaran</button></div></div>
+    <div><span class="state-lbl">Breadcrumb</span>
+      <div class="demo inverse"><nav class="crumb" aria-label="Breadcrumb"><ol><li><a href="#nav">Beranda</a></li><li><a href="#nav">Armada</a></li><li><span aria-current="page">Wuling Cortez Darion</span></li></ol></nav></div>
+      <div class="demo" style="margin-top:.75rem"><nav class="crumb dark" aria-label="Breadcrumb"><ol><li><a href="#nav">Beranda</a></li><li><a href="#nav">Solusi Bisnis</a></li><li><span aria-current="page">Sewa jangka panjang</span></li></ol></nav></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTERACTIVE ===================== -->
+<section class="doc-sec" id="interactive">
+  <h2>Tabs, Segmented, Accordion, Dropdown</h2>
+  <p class="lead">Segmented untuk filter biner (Mobil/Motor). Tabs underline untuk konten paralel di halaman detail. Accordion memakai <code>&lt;details&gt;</code> native. Dropdown memakai permukaan yang sama dengan mega menu.</p>
+  <div class="grid-2">
+    <div class="demo">
+      <span class="state-lbl">Segmented (default / disabled)</span>
+      <div class="row"><div class="seg" role="tablist" data-seg><button role="tab" aria-selected="true">Bulanan</button><button role="tab" aria-selected="false">Tahunan</button><button role="tab" aria-selected="false" disabled>Harian</button></div></div>
+      <span class="state-lbl" style="margin-top:1.5rem">Tabs</span>
+      <div class="tabs" role="tablist" data-tabs><button role="tab" aria-selected="true">Spesifikasi</button><button role="tab" aria-selected="false">Fitur</button><button role="tab" aria-selected="false">Galeri</button><button role="tab" aria-selected="false" disabled>Review</button></div>
+      <div class="tab-panel secondary" id="tabOut">Mesin listrik, 7 kursi, transmisi otomatis, jarak tempuh hingga ±400 km (contoh konten).</div>
+      <span class="state-lbl" style="margin-top:1.5rem">Dropdown</span>
+      <div class="dd"><button class="dd-trigger" aria-haspopup="listbox" aria-expanded="false" id="ddBtn"><span id="ddVal">Pilih durasi</span><svg><use href="#i-chev"/></svg></button>
+        <ul class="dd-menu" role="listbox" id="ddMenu"><li><button role="option">12 bulan</button></li><li><button role="option">24 bulan</button></li><li><button role="option">36 bulan</button></li><li><button role="option" aria-disabled="true">60 bulan (habis)</button></li></ul></div>
+    </div>
+    <div class="demo soft">
+      <span class="state-lbl">Accordion / FAQ</span>
+      <div class="faq-list">
+        <details class="acc" open><summary>Berapa lama durasi sewa minimum?</summary><div class="ans">Sewa jangka panjang dimulai dari 1 bulan. Semakin panjang kontrak, semakin hemat biaya per bulan.</div></details>
+        <details class="acc"><summary>Apakah harga sudah termasuk servis?</summary><div class="ans">Ya. Servis berkala, asuransi, dan bantuan darurat sudah termasuk dalam kontrak.</div></details>
+        <details class="acc"><summary>Dokumen apa saja yang dibutuhkan?</summary><div class="ans">Akta perusahaan, NIB, NPWP, dan KTP penanggung jawab.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MODAL & TOAST ===================== -->
+<section class="doc-sec" id="overlay">
+  <h2>Modal &amp; Toast</h2>
+  <p class="lead">Modal memakai <code>&lt;dialog&gt;</code> native dengan radius 16px, backdrop ink 55% + blur 4px. Di layar &lt; 560px, modal berubah menjadi bottom sheet. Toast memakai permukaan inverse dengan garis aksen di sisi kiri.</p>
+  <div class="demo"><div class="row">
+    <button class="btn btn-primary" id="openModal">Buka modal penawaran</button>
+    <button class="btn btn-outline" data-toast="success">Toast sukses</button>
+    <button class="btn btn-outline" data-toast="brand">Toast info</button>
+    <button class="btn btn-outline" data-toast="danger">Toast error</button>
+  </div></div>
+  <dialog class="modal" id="modal" aria-labelledby="mTitle">
+    <form class="fm" method="dialog">
+      <div class="fm-head"><div><h2 id="mTitle">Minta Penawaran</h2><p>Isi kebutuhan Anda, tim kami menyiapkan penawaran resmi.</p></div><button class="icon-btn neutral" value="cancel" aria-label="Tutup"><svg><use href="#i-x"/></svg></button></div>
+      <div class="fm-body">
+        <div class="fm-row"><div class="fm-field"><label for="m1">Nama</label><input id="m1" placeholder="Nama lengkap"></div><div class="fm-field"><label for="m2">Perusahaan</label><input id="m2" placeholder="PT …"></div></div>
+        <fieldset class="fm-field"><legend>Durasi</legend><div class="fm-chips"><label><input type="radio" name="md" checked><span>12 bulan</span></label><label><input type="radio" name="md"><span>24 bulan</span></label><label><input type="radio" name="md"><span>36 bulan</span></label></div></fieldset>
+        <div class="fm-field"><label for="m3">Catatan <span class="fm-opt">(opsional)</span></label><textarea id="m3"></textarea></div>
+      </div>
+      <div class="fm-foot"><button class="btn btn-primary btn-block" value="ok" id="mSubmit">Kirim permintaan</button></div>
+    </form>
+  </dialog>
+  <div class="toast-region" id="toasts" aria-live="polite"></div>
+  <h3 class="doc-sub">Pratinjau statis</h3>
+  <div class="grid-3">
+    <div class="toast success" style="animation:none"><svg><use href="#i-check"/></svg><div><b>Permintaan terkirim</b><span>Tim kami menghubungi Anda maks. 1×24 jam kerja.</span></div><button class="x" aria-label="Tutup"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
+    <div class="toast brand" style="animation:none"><svg><use href="#i-clock"/></svg><div><b>Jadwal servis mendekat</b><span>Unit B 1234 XY, 3 hari lagi.</span></div></div>
+    <div class="toast danger" style="animation:none"><svg><use href="#i-alert"/></svg><div><b>Gagal mengirim</b><span>Periksa koneksi lalu coba lagi.</span></div></div>
+  </div>
+</section>
+
+<!-- ===================== HERO ===================== -->
+<section class="doc-sec" id="hero">
+  <h2>Hero banner: full-width slider</h2>
+  <p class="lead">Foto full-bleed dengan efek Ken Burns (scale 1.08 ke 1 selama 7 detik) dan scrim 3 lapis (kiri, bawah, atas). Isi: eyebrow + chip, H1 display, sub, sepasang CTA, dan fact strip. Navigasi berupa progress bar per slide, tombol prev/next/pause, dan counter.</p>
+  <div class="hero demo-hero" id="demoHero">
+    <div class="slide is-active">
+      <div class="slide-media"><img src="assets/hero-1.jpg" alt="Mobil MPV di jalan kota"></div><div class="scrim"></div>
+      <div class="slide-content"><div class="wrap"><div class="eyebrow anim">Sewa jangka panjang <span class="chip">Korporat</span></div><h1 class="anim">Mobil operasional tanpa repot kepemilikan</h1><p class="sub anim">Kontrak bulanan hingga tahunan untuk mobil dinas dan operasional perusahaan.</p><div class="hero-cta anim"><a class="btn btn-primary" href="#hero">Minta Penawaran</a><a class="btn btn-ghost-w" href="#hero">Lihat armada</a></div></div></div>
+    </div>
+    <div class="slide">
+      <div class="slide-media"><img src="assets/hero-2.jpg" alt="SUV hitam di jalan kota"></div><div class="scrim"></div>
+      <div class="slide-content"><div class="wrap"><div class="eyebrow anim">SUV untuk tim</div><h1 class="anim">Armada siap pakai untuk mobilitas tim Anda</h1><p class="sub anim">Unit baru, servis dan asuransi sudah termasuk dalam kontrak.</p><div class="hero-cta anim"><a class="btn btn-white" href="#hero">Lihat SUV</a><a class="btn btn-ghost-w" href="#hero">Bantuan darurat 24/7</a></div></div></div>
+    </div>
+    <div class="hero-ui"><div class="wrap"><div class="dots"><button class="dot is-active" aria-label="Slide 1"><span>Jangka panjang</span><i></i></button><button class="dot" aria-label="Slide 2"><span>SUV untuk tim</span><i></i></button></div><button class="icon-btn on-dark" data-hero="-1" aria-label="Sebelumnya"><svg><use href="#i-left"/></svg></button><button class="icon-btn on-dark" data-hero="1" aria-label="Berikutnya"><svg><use href="#i-right"/></svg></button><span class="counter"><b id="heroNo">01</b> / 02</span></div></div>
+  </div>
+  <p class="spec">Mobile (&lt; 760px): foto mengisi 62% atas, scrim berganti dari bawah, konten turun ke bawah, fact strip dan label dot disembunyikan.</p>
+</section>
+
+<!-- ===================== SECTIONS ===================== -->
+<section class="doc-sec" id="sections">
+  <h2>Trust strip, Service showcase, Steps</h2>
+  <p class="lead">Pola section yang berulang di semua halaman.</p>
+  <span class="state-lbl">Trust strip (langsung di bawah hero)</span>
+  <div class="trust" style="border-radius:var(--radius-md);padding-inline:1.5rem"><ul>
+    <li><span class="ic-halo"><svg><use href="#i-shield"/></svg></span><div><strong>Terdaftar di e-Katalog LKPP</strong><span>Siap untuk pengadaan instansi pemerintah</span></div></li>
+    <li><span class="ic-halo"><svg><use href="#i-grid"/></svg></span><div><strong>Ratusan unit mobil &amp; motor</strong><span>Dari city car hingga kendaraan premium</span></div></li>
+    <li><span class="ic-halo"><svg><use href="#i-clock"/></svg></span><div><strong>Bantuan darurat 24 jam</strong><span>Tim siaga di seluruh Jabodetabek</span></div></li>
+  </ul></div>
+  <span class="state-lbl" style="margin-top:2rem">Service showcase (accordion + image stage)</span>
+  <div class="svc" data-svc>
+    <div>
+      <div class="svc-item is-active"><button class="svc-tab"><h3>Servis berkala terjadwal</h3></button><div class="svc-body"><div class="svc-inner"><p>Servis tiap 10.000 km atau 6 bulan, mana yang lebih dulu. Tim kami mengingatkan sebelum jadwalnya tiba.</p></div></div></div>
+      <div class="svc-item"><button class="svc-tab"><h3>Jaringan ATPM di seluruh Indonesia</h3></button><div class="svc-body"><div class="svc-inner"><p>Perawatan di bengkel resmi agar garansi pabrikan tetap berlaku.</p></div></div></div>
+      <div class="svc-item"><button class="svc-tab"><h3>Bantuan darurat di jalan 24/7</h3></button><div class="svc-body"><div class="svc-inner"><p>Derek, ganti ban, hingga unit pengganti saat kendaraan bermasalah.</p></div></div></div>
+    </div>
+    <div class="svc-stage"><img src="assets/service-1.jpg" alt="Teknisi servis"><div class="stat-card"><strong>10.000 km</strong><span>atau 6 bulan, mana yang lebih dulu</span></div></div>
+  </div>
+  <span class="state-lbl" style="margin-top:2.5rem">Numbered steps</span>
+  <ol class="steps">
+    <li><h3>Kirim kebutuhan</h3><p>Jumlah unit, jenis kendaraan, durasi, dan kebutuhan sopir.</p></li>
+    <li><h3>Terima penawaran</h3><p>Penawaran tertulis yang bisa langsung diproses di internal.</p></li>
+    <li><h3>Verifikasi</h3><p>Dokumen perusahaan dan survei lokasi oleh tim kami.</p></li>
+    <li><h3>Unit diantar</h3><p>Kendaraan siap pakai diantar ke lokasi Anda.</p></li>
+  </ol>
+</section>
+
+<!-- ===================== HOW ===================== -->
+<section class="how glow" id="how" style="padding:clamp(4rem,8vw,6rem) clamp(1rem,4vw,4rem)">
+  <span class="chip accent">Untuk perusahaan &amp; instansi</span>
+  <h2 style="margin-top:1rem;max-width:14ch;font-size:var(--text-h2-lg-size)">Cara sewa, empat langkah</h2>
+  <p class="lead" style="margin-bottom:3.5rem">Section gelap dengan radial glow. Garis progres terisi dan node menyala satu per satu saat section masuk viewport.</p>
+  <div class="how-track"><div class="how-line"><span></span></div>
+    <ol class="how-steps">
+      <li class="how-step" style="--i:0"><span class="how-node"><svg><use href="#i-chat"/></svg></span><span class="how-num">Langkah 01</span><h3>Konsultasi</h3><p>Ceritakan kebutuhan armada Anda.</p></li>
+      <li class="how-step" style="--i:1"><span class="how-node"><svg><use href="#i-doc"/></svg></span><span class="how-num">Langkah 02</span><h3>Penawaran</h3><p>Terima penawaran resmi tertulis.</p></li>
+      <li class="how-step" style="--i:2"><span class="how-node"><svg><use href="#i-shield"/></svg></span><span class="how-num">Langkah 03</span><h3>Verifikasi</h3><p>Dokumen dan survei domisili.</p></li>
+      <li class="how-step" style="--i:3"><span class="how-node"><svg><use href="#i-car"/></svg></span><span class="how-num">Langkah 04</span><h3>Unit diantar</h3><p>Siap pakai di lokasi Anda.</p></li>
+    </ol>
+  </div>
+  <div class="hero-cta"><button class="btn btn-white btn-sm" id="howReplay">Putar ulang animasi</button></div>
+</section>
+
+<!-- ===================== COMPARE ===================== -->
+<section class="doc-sec" id="compare" style="background:var(--color-bg-inverse);color:var(--white);border:0">
+  <h2>Comparison table</h2>
+  <p class="lead" style="color:var(--color-text-inverse-muted);margin-bottom:2rem">Dipakai di halaman Solusi Bisnis dan detail mobil. Selalu di section gelap. Baris di-highlight ungu 10% saat hover, kolom bisa di-scroll horizontal di mobile.</p>
+  <div class="cmp-scroll" tabindex="0"><table class="cmp">
+    <thead><tr><th></th><th>Sewa Jennete</th><th>Beli tunai</th><th>Kredit</th></tr></thead>
+    <tbody>
+      <tr><th>Modal awal</th><td><span class="yes">Tanpa DP</span></td><td>100% harga unit</td><td>DP 20–30%</td></tr>
+      <tr><th>Servis &amp; asuransi</th><td><span class="yes">Termasuk</span></td><td>Biaya terpisah</td><td>Biaya terpisah</td></tr>
+      <tr><th>Unit pengganti</th><td><span class="yes">Disediakan</span></td><td>Tidak ada</td><td>Tidak ada</td></tr>
+    </tbody></table></div>
+  <p class="spec" style="color:var(--color-text-inverse-muted)">Isi tabel adalah contoh. Verifikasi ke konten final situs.</p>
+</section>
+
+<!-- ===================== CTA & FOOTER ===================== -->
+<section id="cta">
+  <div class="cta-band" style="background-image:url(assets/hero-2.jpg)"><div class="wrap"><div style="max-width:560px"><h2>Siap menyiapkan armada untuk tim Anda?</h2><p>Kirim kebutuhan, kami siapkan penawaran resmi dalam 1×24 jam kerja.</p><div class="cta-band-btns"><a class="btn btn-white" href="#cta">Minta Penawaran</a><a class="btn btn-ghost-w" href="#cta">Chat WhatsApp</a></div></div></div></div>
+  <footer class="site-foot"><div class="wrap">
+    <div class="foot">
+      <div><a class="logo" href="#top" style="color:var(--white)"><span class="logo-badge"><img src="assets/logo-mark.png" alt="" width="40" height="40"></span><span class="logo-word">Jennete <span>Rent</span></span></a><p style="margin-top:1rem;max-width:32ch">Sewa mobil jangka panjang untuk perusahaan di Jakarta.</p></div>
+      <div><h4>Solusi</h4><ul><li><a href="#cta">Sewa jangka panjang</a></li><li><a href="#cta">Mobil dengan sopir</a></li><li><a href="#cta">Pengadaan instansi</a></li></ul></div>
+      <div><h4>Armada</h4><ul><li><a href="#cta">SUV</a></li><li><a href="#cta">MPV</a></li><li><a href="#cta">Motor</a></li></ul></div>
+      <div><h4>Bantuan</h4><ul><li><a href="#cta">FAQ</a></li><li><a href="#cta">Kontak</a></li><li><a href="#cta">Syarat &amp; ketentuan</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Jennete Rent</span><span>Kebijakan privasi</span></div>
+  </div></footer>
+  <div class="doc-sec" style="border-bottom:0">
+    <span class="state-lbl">WhatsApp FAB (fixed kanan bawah, z 45). Di &lt; 560px hanya ikon.</span>
+    <div class="row"><a class="wa is-static" href="#cta"><svg><use href="#i-wa"/></svg><span>WhatsApp</span></a></div>
+  </div>
+</section>
+
+<!-- ===================== A11Y ===================== -->
+<section class="doc-sec" id="a11y">
+  <h2>Aksesibilitas</h2>
+  <p class="lead">Rasio kontras dihitung otomatis di browser dari token (WCAG 2.x). Target AA: 4.5:1 untuk teks normal, 3:1 untuk teks besar (≥ 24px, atau ≥ 18.66px bold).</p>
+  <div class="tbl-scroll"><table class="tbl" id="a11yTbl"><thead><tr><th>Pasangan</th><th>Contoh</th><th>Rasio</th><th>AA normal</th><th>Catatan</th></tr></thead><tbody></tbody></table></div>
+  <h3 class="doc-sub">Temuan yang perlu diputuskan</h3>
+  <div class="grid-2">
+    <div class="card"><span class="badge success">Sudah diperbaiki</span><h3>Tombol WhatsApp</h3><p><code>green.600</code> diganti dari <code>#1F8F4E</code> (4.12:1) ke <code>#1A7F45</code> (sekitar 5.0:1). Teks putih 16px sekarang lolos AA, dan hover <code>#18763F</code> tetap lebih gelap.</p></div>
+    <div class="card"><span class="badge neutral">Info</span><h3>Teks placeholder foto</h3><p><code>ink.500 #8A9197</code> di atas putih hanya sekitar 3.2:1. Pakai hanya untuk ikon dekoratif, jangan untuk teks yang harus dibaca.</p></div>
+  </div>
+  <h3 class="doc-sub">Checklist</h3>
+  <ul class="secondary" style="line-height:1.9">
+    <li>Fokus selalu terlihat: <code>:focus-visible</code> berupa outline 2px currentColor atau ring ungu 3px pada input.</li>
+    <li>Touch target minimal 44px (<code>--size-control-sm</code>), default 48px.</li>
+    <li>Slider hero bisa di-pause, dan autoplay mati saat <code>prefers-reduced-motion</code>.</li>
+    <li>Ikon dekoratif memakai <code>aria-hidden</code>, tombol yang hanya berisi ikon wajib punya <code>aria-label</code>.</li>
+    <li>Error form memakai <code>aria-invalid="true"</code> + <code>aria-describedby</code> ke <code>.fm-err</code>.</li>
+  </ul>
+</section>
+
+<!-- ===================== USAGE ===================== -->
+<section class="doc-sec" id="usage">
+  <h2>Cara pakai</h2>
+  <div class="grid-2">
+    <div>
+      <h3>Struktur file</h3>
+<pre class="demo soft mono" style="overflow:auto;line-height:1.7;margin-top:1rem">design-system/
+├── tokens/
+│   ├── design-tokens.json   ← single source of truth
+│   ├── tokens.css           ← generated
+│   └── tokens.js            ← generated (dipakai styleguide)
+├── build-tokens.py
+├── components.css
+├── assets/
+└── index.html               ← styleguide ini</pre>
+    </div>
+    <div>
+      <h3>Alur kerja</h3>
+      <ol class="secondary" style="line-height:1.9;margin-top:1rem;padding-left:1.2rem">
+        <li>Ubah nilai di <code>design-tokens.json</code>.</li>
+        <li>Jalankan <code>python3 design-system/build-tokens.py</code>.</li>
+        <li>Di halaman, muat <code>tokens.css</code> lalu <code>components.css</code>.</li>
+        <li>Nama class mengikuti situs (<code>.btn-dark</code>, <code>.vcard</code>, <code>.how</code>, dst.). <code>tokens.css</code> juga menyediakan alias lama (<code>--ink</code>, <code>--brand</code>, <code>--r</code> …), jadi CSS situs yang sekarang tetap jalan.</li>
+        <li>Komponen baru: pakai token semantic <code>--color-*</code>, jangan hex mentah.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+<div class="copied" id="copied">Disalin</div>
+
+<script>
+(function(){
+  const T = window.JR_TOKENS || {};
+  const $ = s => document.querySelector(s);
+  const entries = Object.entries(T);
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const copy = txt => { navigator.clipboard && navigator.clipboard.writeText(txt).catch(()=>{}); const c=$('#copied'); c.textContent='Disalin: '+txt; c.classList.add('show'); setTimeout(()=>c.classList.remove('show'),1400); };
+
+  /* counts */
+  $('#cntColor').textContent = entries.filter(([k])=>k.startsWith('color.')).length;
+  $('#cntType').textContent = entries.filter(([k])=>k.startsWith('text.')).length;
+  $('#cntAll').textContent = entries.length;
+
+  /* swatches */
+  const swatch = (k,t) => `<button class="sw" data-copy="var(${t.var})" title="${t.description||''}"><i style="--c:var(${t.var})"></i><div><b>${t.var}</b><span>${String(t.value).startsWith('{')? t.value.replace(/[{}]/g,'').replace('color.primitive.','') : t.value}</span>${t.description?`<span>${t.description}</span>`:''}</div></button>`;
+  const groups = {};
+  entries.filter(([k])=>k.startsWith('color.primitive.')).forEach(([k,t])=>{ const g=k.split('.')[2]; (groups[g]=groups[g]||[]).push(swatch(k,t)); });
+  $('#swPrimitive').innerHTML = Object.entries(groups).map(([g,a])=>`<div class="sw-group"><h4>${g}</h4><div class="sw-row">${a.join('')}</div></div>`).join('');
+  const sem = {bg:[],text:[],border:[],brand:[],status:[]};
+  entries.filter(([k])=>k.startsWith('color.semantic.')).forEach(([k,t])=>{ const n=k.split('.')[2]; const g=n.startsWith('bg')?'bg':n.startsWith('text')?'text':n.startsWith('border')?'border':(n.startsWith('brand')||n==='focus-ring')?'brand':'status'; sem[g].push(swatch(k,t)); });
+  $('#swSemantic').innerHTML = Object.entries(sem).map(([g,a])=>`<div class="sw-group"><h4>${g}</h4><div class="sw-row">${a.join('')}</div></div>`).join('');
+  $('#swGradient').innerHTML = entries.filter(([k])=>k.startsWith('gradient.')).map(([k,t])=>`<button class="sw" data-copy="var(${t.var})"><i class="grad" style="--c:var(${t.var});height:88px"></i><div><b>${t.var}</b><span>${t.description||''}</span></div></button>`).join('');
+
+  /* type table */
+  $('#typeTbl tbody').innerHTML = entries.filter(([k])=>k.startsWith('text.')).map(([k,t])=>{ const n=k.split('.')[1], v=t.value; return `<tr><td><div style="font-size:${v.fontSize};line-height:${v.lineHeight};letter-spacing:${v.letterSpacing};font-weight:${v.fontWeight};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw">${n==='numeral'?'01 02 03':n==='stat'?'10.000 km':'Sewa mobil untuk bisnis'}</div><div class="t-caption">${t.description||''}</div></td><td style="white-space:nowrap"><code>--text-${n}-*</code></td><td class="mono">${v.fontSize}</td><td class="mono">${v.lineHeight}</td><td class="mono">${v.letterSpacing}</td><td class="mono">${v.fontWeight}</td></tr>`; }).join('');
+
+  /* spacing */
+  $('#spaceTbl tbody').innerHTML = entries.filter(([k])=>k.startsWith('space.')).map(([k,t])=>`<tr><td><code>${t.var}</code></td><td class="mono">${t.value}</td><td><div class="bar-viz" style="width:var(${t.var});max-width:100%"></div></td></tr>`).join('');
+
+  /* radius */
+  $('#radiusRow').innerHTML = entries.filter(([k])=>k.startsWith('radius.')).map(([k,t])=>`<div><div class="rad-viz" style="border-radius:var(${t.var})"></div><div class="spec"><b>${k.split('.')[1]}</b> · ${t.value}<br>${t.description||''}</div></div>`).join('');
+
+  /* shadow */
+  $('#shadowGrid').innerHTML = entries.filter(([k])=>k.startsWith('shadow.')).map(([k,t])=>`<div><div class="shadow-viz" style="box-shadow:var(${t.var});${k.endsWith('brand')||k.endsWith('icon')?'background:var(--gradient-icon);color:var(--white)':''}">${t.var}</div><div class="spec">${t.description||''}</div></div>`).join('');
+
+  /* motion */
+  $('#motionTbl').innerHTML = entries.filter(([k])=>k.startsWith('motion.')).map(([k,t])=>`<tr><td><code>${t.var}</code></td><td class="mono">${t.value}</td><td>${t.description||''}</td></tr>`).join('');
+
+  /* icons */
+  $('#iconRow').innerHTML = [...document.querySelectorAll('symbol')].map(s=>`<div style="text-align:center"><svg width="24" height="24" style="margin:auto"><use href="#${s.id}"/></svg><div class="spec" style="margin-top:.4rem">${s.id.replace('i-','')}</div></div>`).join('');
+
+  /* contrast */
+  const toRGB = c => { const d=document.createElement('div'); d.style.color=c; document.body.appendChild(d); const m=getComputedStyle(d).color.match(/[\d.]+/g).map(Number); d.remove(); return m; };
+  const lum = ([r,g,b]) => [r,g,b].map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);
+  const ratio = (a,b) => { const [x,y]=[lum(toRGB(a)),lum(toRGB(b))].sort((p,q)=>q-p); return (x+.05)/(y+.05); };
+  const pairs = [
+    ['--color-text','--color-bg','Body text'],['--color-text-secondary','--color-bg','Lead, deskripsi'],['--color-text-muted','--color-bg','Meta, caption'],['--color-text-muted','--color-bg-soft','Meta di section soft'],
+    ['--color-brand','--color-bg','Link / outline button'],['--color-text-on-brand','--color-brand','Primary button'],['--color-text-on-brand','--purple-600','Primary button (ujung atas gradien)'],
+    ['--color-text-inverse-muted','--color-bg-inverse','Footer, trust sub'],['--color-text-inverse-body','--color-bg-inverse','Body di section gelap'],['--color-text-inverse-accent','--color-bg-inverse','Eyebrow di section gelap'],['--purple-450','--color-bg-inverse','Nomor langkah (How)'],
+    ['--white','--color-whatsapp','Tombol WhatsApp'],['--white','--color-whatsapp-hover','WhatsApp hover'],['--color-danger','--color-bg','Error text'],['--color-warning','--color-warning-soft','Notice'],['--ink-500','--color-bg','Placeholder icon']
+  ];
+  $('#a11yTbl tbody').innerHTML = pairs.map(([f,b,note])=>{ const r=ratio(css(f),css(b)); const ok=r>=4.5; return `<tr><td><code>${f}</code> / <code>${b}</code></td><td><span style="display:inline-block;padding:.3rem .6rem;border-radius:4px;color:var(${f});background:var(${b});font-weight:600;border:1px solid var(--color-border)">Aa Sewa</span></td><td class="mono">${r.toFixed(2)}:1</td><td class="${ok?'pass':'fail'}">${ok?'Lolos':(r>=3?'Hanya teks besar':'Gagal')}</td><td>${note}</td></tr>`; }).join('');
+
+  /* copy */
+  document.addEventListener('click', e => { const b=e.target.closest('[data-copy]'); if(b) copy(b.dataset.copy); });
+
+  /* doc nav: active + mobile toggle */
+  const links=[...document.querySelectorAll('.doc-nav a[href^="#"]')];
+  const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+en.target.id)); } }),{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('main [id]').forEach(s=>{ if(links.some(l=>l.getAttribute('href')==='#'+s.id)) io.observe(s); });
+  const nav=$('#docNav'), mb=$('#docMenu');
+  mb.addEventListener('click',()=>{ const o=nav.classList.toggle('open'); mb.setAttribute('aria-expanded',o); });
+  links.forEach(l=>l.addEventListener('click',()=>{ nav.classList.remove('open'); mb.setAttribute('aria-expanded','false'); }));
+
+  /* stepper */
+  document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{ const i=b.parentElement.querySelector('input'); i.value=Math.max(1,(+i.value||0)+(+b.dataset.step)); }));
+
+  /* segmented + tabs */
+  document.querySelectorAll('.seg,[data-tabs]').forEach(g=>g.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||b.disabled) return; g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',x===b)); if(g.hasAttribute('data-tabs')) $('#tabOut').textContent='Konten tab "'+b.textContent+'" (contoh).'; }));
+
+  /* dropdown */
+  const ddB=$('#ddBtn'), ddM=$('#ddMenu');
+  ddB.addEventListener('click',()=>{ const o=ddM.classList.toggle('open'); ddB.setAttribute('aria-expanded',o); });
+  ddM.addEventListener('click',e=>{ const o=e.target.closest('[role=option]'); if(!o||o.getAttribute('aria-disabled')==='true') return; ddM.querySelectorAll('[role=option]').forEach(x=>x.setAttribute('aria-selected',x===o)); $('#ddVal').textContent=o.textContent; ddM.classList.remove('open'); ddB.setAttribute('aria-expanded','false'); });
+  document.addEventListener('click',e=>{ if(!e.target.closest('.dd')){ ddM.classList.remove('open'); ddB.setAttribute('aria-expanded','false'); } });
+
+  /* modal + toast */
+  const dlg=$('#modal');
+  $('#openModal').addEventListener('click',()=>dlg.showModal());
+  const toastData={success:['i-check','Permintaan terkirim','Tim kami menghubungi Anda maks. 1×24 jam kerja.'],brand:['i-clock','Jadwal servis mendekat','Unit B 1234 XY, 3 hari lagi.'],danger:['i-alert','Gagal mengirim','Periksa koneksi lalu coba lagi.']};
+  const toast=k=>{ const [ic,b,s]=toastData[k]; const el=document.createElement('div'); el.className='toast '+k; el.innerHTML=`<svg aria-hidden="true"><use href="#${ic}"/></svg><div><b>${b}</b><span>${s}</span></div><button class="x" aria-label="Tutup"><svg width="16" height="16"><use href="#i-x"/></svg></button>`; el.querySelector('.x').onclick=()=>el.remove(); $('#toasts').appendChild(el); setTimeout(()=>el.remove(),4500); };
+  document.querySelectorAll('[data-toast]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.toast)));
+  dlg.addEventListener('close',()=>{ if(dlg.returnValue==='ok') toast('success'); });
+
+  /* rail */
+  const rail=$('#rail');
+  document.querySelectorAll('[data-rail]').forEach(b=>b.addEventListener('click',()=>rail.scrollBy({left:(+b.dataset.rail)*rail.clientWidth/2,behavior:'smooth'})));
+
+  /* hero slider */
+  const hero=$('#demoHero'), slides=[...hero.querySelectorAll('.slide')], dots=[...hero.querySelectorAll('.dot')]; let cur=0, timer;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const go=n=>{ cur=(n+slides.length)%slides.length; slides.forEach((s,i)=>s.classList.toggle('is-active',i===cur)); dots.forEach((d,i)=>{ d.classList.toggle('is-active',i===cur); d.classList.toggle('is-done',i<cur); const ii=d.querySelector('i'); ii.style.animation='none'; ii.offsetWidth; ii.style.animation=''; }); $('#heroNo').textContent=String(cur+1).padStart(2,'0'); clearTimeout(timer); if(!reduce) timer=setTimeout(()=>go(cur+1),7000); };
+  hero.querySelectorAll('[data-hero]').forEach(b=>b.addEventListener('click',()=>go(cur+(+b.dataset.hero))));
+  dots.forEach((d,i)=>d.addEventListener('click',()=>go(i)));
+  go(0);
+
+  /* service showcase */
+  document.querySelectorAll('[data-svc] .svc-item').forEach(it=>it.querySelector('.svc-tab').addEventListener('click',()=>{ it.parentElement.querySelectorAll('.svc-item').forEach(x=>x.classList.toggle('is-active',x===it)); }));
+
+  /* how timeline */
+  const how=$('#how');
+  new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting) how.classList.add('in-view'); }),{threshold:.35}).observe(how);
+  $('#howReplay').addEventListener('click',()=>{ how.classList.remove('in-view'); requestAnimationFrame(()=>requestAnimationFrame(()=>how.classList.add('in-view'))); });
+})();
+</script>
+</body>
+</html>
